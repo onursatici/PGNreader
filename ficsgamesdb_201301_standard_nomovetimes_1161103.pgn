@@ -1,0 +1,17 @@
+[Event "FICS rated standard game"]
+[Site "FICS freechess.org"]
+[FICSGamesDBGameNo "331779989"]
+[White "kvsankaran"]
+[Black "Koryakin"]
+[WhiteElo "1676"]
+[BlackElo "1730"]
+[TimeControl "900+0"]
+[Date "2013.01.31"]
+[Time "23:47:00"]
+[WhiteClock "0:15:00.000"]
+[BlackClock "0:15:00.000"]
+[ECO "C50"]
+[PlyCount "40"]
+[Result "0-1"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. O-O d6 5. c3 Qf6 6. d4 exd4 7. cxd4 Nxd4 8. e5 Nxf3+ 9. gxf3 dxe5 10. Bd5 c6 11. Be4 Bh3 12. Re1 Ne7 13. Qd3 Rd8 14. Qb3 Bb6 15. Na3 O-O 16. Be3 Bxe3 17. Qxe3 Nd5 18. Qc1 Nf4 19. Nc4 Qg5+ 20. Kh1 Qg2# {White checkmated} 0-1
