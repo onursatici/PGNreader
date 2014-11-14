@@ -72,31 +72,58 @@ public class PGNRread {
 			String blackMove = hit[2];
 			String whiteMoveLoc="";
 			String blackMoveLoc="";
+			Piece lastMovedWhitePiece = null;
+			Piece lastMovedBlackPiece = null;
 
-			checkPawnMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkPawnMove(blackMove,blackMoveLoc,moveNumber,false,P);
-
-			checkKnightMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkKnightMove(blackMove,blackMoveLoc,moveNumber,false,P);
-
-			checkBishopMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkBishopMove(blackMove,blackMoveLoc,moveNumber,false,P);
-
-			checkRookMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkRookMove(blackMove,blackMoveLoc,moveNumber,false,P);
-			
-			checkQueenMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkQueenMove(blackMove,blackMoveLoc,moveNumber,false,P);
-			
-			checkKingMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
-			checkKingMove(blackMove,blackMoveLoc,moveNumber,false,P);
-			
+			lastMovedWhitePiece=checkPawnMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+			if(lastMovedWhitePiece == null){
+				lastMovedWhitePiece=checkKnightMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+				if(lastMovedWhitePiece == null){
+					lastMovedWhitePiece=checkBishopMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+					if(lastMovedWhitePiece == null){
+						lastMovedWhitePiece=checkRookMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+						if(lastMovedWhitePiece == null){
+							lastMovedWhitePiece=checkQueenMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+							if(lastMovedWhitePiece == null){
+								lastMovedWhitePiece=checkKingMove(whiteMove,whiteMoveLoc,moveNumber,true,P);
+							}
+						}
+					}
+				}
+			}
+			lastMovedBlackPiece=checkPawnMove(blackMove,blackMoveLoc,moveNumber,false,P);
+			if(lastMovedBlackPiece == null){
+				lastMovedBlackPiece=checkKnightMove(blackMove,blackMoveLoc,moveNumber,false,P);
+				if(lastMovedBlackPiece == null){
+					lastMovedBlackPiece=checkBishopMove(blackMove,blackMoveLoc,moveNumber,false,P);
+					if(lastMovedBlackPiece == null){
+						lastMovedBlackPiece=checkRookMove(blackMove,blackMoveLoc,moveNumber,false,P);
+						if(lastMovedBlackPiece == null){
+							lastMovedBlackPiece=checkQueenMove(blackMove,blackMoveLoc,moveNumber,false,P);
+							if(lastMovedBlackPiece == null){
+								lastMovedBlackPiece=checkKingMove(blackMove,blackMoveLoc,moveNumber,false,P);
+							}
+						}
+					}
+				}
+			}
 			checkCastling(whiteMove,moveNumber,true,P);
 			checkCastling(blackMove,moveNumber,false,P);
+			
+			checkChecks(whiteMove,moveNumber,true,P);
+			checkChecks(blackMove,moveNumber,false,P);
 		}
-		Enumeration<String[]> e = P.bRK.moveHistory.elements();
+		Enumeration<String[]> e = P.bNQ.moveHistory.elements();
 		while(e.hasMoreElements()){
 			System.out.println(Arrays.toString(e.nextElement()));
+		}
+	}
+	
+	private static void checkChecks(String move,String moveNumber, boolean isWhite, PieceList P){
+		if(move.charAt(move.length()-1)== '!'){
+			for(Piece p : P.allPieces){
+			 // TODO 
+			}
 		}
 	}
 	
@@ -138,7 +165,7 @@ public class PGNRread {
 		}
 	}
 	
-	private static void checkKingMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
+	private static King checkKingMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
 		if(move.charAt(0)=='K'){
 			moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -148,15 +175,18 @@ public class PGNRread {
 				P.wK.setLocation(moveLoc);
 				String[] moveEntry = {moveNumber,moveLoc};
 				P.wK.moveHistory.add(moveEntry);
+				return P.wK;
 			}else{
 				P.bK.setLocation(moveLoc);
 				String[] moveEntry = {moveNumber, moveLoc};
 				P.bK.moveHistory.add(moveEntry);
+				return P.bK;
 			}
 		}
+		return null;
 	}
 	
-	private static void checkQueenMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
+	private static Queen checkQueenMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
 		if(move.charAt(0)=='Q'){
 			moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -166,17 +196,19 @@ public class PGNRread {
 				P.wQ.setLocation(moveLoc);
 				String[] moveEntry = {moveNumber, moveLoc};
 				P.wQ.moveHistory.add(moveEntry);
+				return P.wQ;
 			}else{
 				P.bQ.setLocation(moveLoc);
 				String [] moveEntry = {moveNumber, moveLoc};
-				P.bQ.moveHistory.add(moveEntry);				
-			}
-				
+				P.bQ.moveHistory.add(moveEntry);
+				return P.bQ;
+			}	
 		}
+		return null;
 	}
 
 	
-	private static void checkKnightMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P) {
+	private static Knight checkKnightMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P) {
 		if(move.charAt(0)=='N'){
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -190,29 +222,34 @@ public class PGNRread {
 					P.wNQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wNQ.moveHistory.add(moveEntry);
+					return P.wNQ;
 				}
 				if(P.wNK.canMove(moveLoc)){
 					P.wNK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wNK.moveHistory.add(moveEntry);
+					return P.wNK;
 				}
 			}else{
 				if(P.bNQ.canMove(moveLoc)){
 					P.bNQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bNQ.moveHistory.add(moveEntry);
+					return P.bNQ;
 				}
 				if(P.bNK.canMove(moveLoc)){
 					P.bNK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bNK.moveHistory.add(moveEntry);
+					return P.bNK;
 				}
 			}
 		}
+		return null;
 
 	}
 
-	private static void checkBishopMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
+	private static Bishop checkBishopMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
 		if(move.charAt(0)=='B'){
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -226,29 +263,34 @@ public class PGNRread {
 					P.wBQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wBQ.moveHistory.add(moveEntry);
+					return P.wBQ;
 				}
 				if(P.wBK.canMove(moveLoc)){
 					P.wBK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wBK.moveHistory.add(moveEntry);
+					return P.wBK;
 				}
 			}else{
 				if(P.bBQ.canMove(moveLoc)){
 					P.bBQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bBQ.moveHistory.add(moveEntry);
+					return P.bBQ;
 				}
 				if(P.bBK.canMove(moveLoc)){
 					P.bBK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bBK.moveHistory.add(moveEntry);
+					return P.bBK;
 				}
 			}
 		}
+		return null;
 	}
 
-	private static void checkRookMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
-		//TODO check if locations between moveLoc and currentLoc is empty
+	private static Rook checkRookMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
+
 		if(move.charAt(0)=='R'){
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -262,25 +304,30 @@ public class PGNRread {
 					P.wRQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wRQ.moveHistory.add(moveEntry);
+					return P.wRQ;
 				}
 				if(P.wRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.wRK.getLocation())){
 					P.wRK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.wRK.moveHistory.add(moveEntry);
+					return P.wRK;
 				}
 			}else{
 				if(P.bRQ.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRQ.getLocation())){
 					P.bRQ.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bRQ.moveHistory.add(moveEntry);
+					return P.bRQ;
 				}
 				if(P.bRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRK.getLocation())){
 					P.bRK.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					P.bRK.moveHistory.add(moveEntry);
+					return P.bRK;
 				}
 			}
 		}
+		return null;
 	}
 
 	private static char max(char a, char b){
@@ -322,7 +369,7 @@ public class PGNRread {
 	}
 
 
-	private static void checkPawnMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
+	private static Pawn checkPawnMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
 
 		if(move.charAt(0)=='a' || move.charAt(0)=='b' || move.charAt(0)=='c' || move.charAt(0)=='d' ||
 				move.charAt(0)=='e' || move.charAt(0)=='f' || move.charAt(0)=='g' || move.charAt(0)=='h'){
@@ -341,9 +388,11 @@ public class PGNRread {
 					pawn.setLocation(moveLoc);
 					String[] moveEntry = {moveNumber,moveLoc};
 					pawn.moveHistory.add(moveEntry);
+					return pawn;
 				}
 			}
 		}
+		return null;
 	}
 
 	public static void main(String[] argv){

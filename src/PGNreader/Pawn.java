@@ -49,10 +49,19 @@ public class Pawn extends Piece {
 	}
 	
 	public static void main(String[] argv){
-		Pawn pA = new Pawn("e2","white");
-		
-		
-		System.out.println(pA.canMove("e4",false));	
+		 Pawn p = new Pawn("a2","white");
+		 Knight k = new Knight("c1","white");
+		 Bishop b = new Bishop("b1","white");
+		 Piece[] list ={p,k,b};
+		 
+		 p.setLocation("b3");
+		 for(Piece a : list){
+			 if(a.getLocation() == "c1"){
+				 a.checkHistory.add("3");
+			 }
+		 }
+		 System.out.println(k.checkHistory.get(0));
+		 
 	}
 	
 	
