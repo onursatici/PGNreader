@@ -1,13 +1,19 @@
 package PGNreader;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PGNRread {
 
@@ -21,7 +27,7 @@ public class PGNRread {
 		try{
 			String currentLine;
 			br=new BufferedReader(new FileReader( //PGN to read
-					"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
+					"/Users/ethangottlieb/Documents/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
 			//iterate through every line
 			while((currentLine = br.readLine()) != null){
 
@@ -57,7 +63,7 @@ public class PGNRread {
 		return null;
 	}
 
-	public static void extractMoves(String movesString, PieceList P){
+	public static void extractMoves(String movesString, PieceList P) throws IOException{
 		Pattern pattern = Pattern.compile("[0-9]+\\..+?(?=\\s[0-9]+\\.)"); // regex to extract each move e.g "1. d4 d6"  \\s[0-9]+
 		// TODO add regex for last move
 		Matcher matcher = pattern.matcher(movesString);
@@ -113,10 +119,33 @@ public class PGNRread {
 			checkChecks(whiteMove,moveNumber,true,P);
 			checkChecks(blackMove,moveNumber,false,P);
 		}
-		Enumeration<String[]> e = P.bNQ.moveHistory.elements();
-		while(e.hasMoreElements()){
-			System.out.println(Arrays.toString(e.nextElement()));
+		
+		ObjectMapper mapper = new ObjectMapper();
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("JSONoutput.txt", false)));
+
+		for (Piece piece :  P.allPieces){
+			Enumeration<String[]> e = piece.moveHistory.elements();
+
+			try
+			{
+				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(piece));	    	  
+			} catch (JsonGenerationException a)
+			{
+				a.printStackTrace();
+			} catch (JsonMappingException a)
+			{
+				a.printStackTrace();
+			} catch (IOException a)
+			{
+				a.printStackTrace();
+			}
+
+			while(e.hasMoreElements()){
+				System.out.print(Arrays.toString(e.nextElement()) + " ");
+			}
+			System.out.println();
 		}
+		out.close();
 	}
 	
 	private static void checkChecks(String move,String moveNumber, boolean isWhite, PieceList P){

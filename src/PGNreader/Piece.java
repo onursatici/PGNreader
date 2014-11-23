@@ -4,13 +4,14 @@ import java.util.Vector;
 
 
 public class Piece {
-	private String location = "";
+	private String piece = "";
+	private String origin = "";
 	private String color ="";
+	private String location = "";
 	public Vector<String[]> moveHistory=new Vector<String[]>(10);
 	public Vector<String> checkHistory=new Vector<String>(5);
 	public Vector<String[]> captureHistory=new Vector<String[]>(5);
 	public String[] killedBy= new String[2];
-	
 	
 	public void setLocation(String loc){
 		this.location= loc;
@@ -18,6 +19,20 @@ public class Piece {
 	
 	public String getLocation(){
 		return this.location;
+	}
+	public void setOrigin(String org){
+		this.origin= org;
+	}
+	
+	public String getOrigin(){
+		return this.origin;
+	}
+	public void setPiece(String type){
+		this.piece= type;
+	}
+	
+	public String getPiece(){
+		return this.piece;
 	}
 	public void setColor(String color){
 		this.color = color;
