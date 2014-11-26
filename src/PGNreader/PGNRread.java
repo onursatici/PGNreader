@@ -13,21 +13,24 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper; 
 
 public class PGNRread {
 
 	public static String[][] parsePGN(){
-	//TODO
+	
 	//  [0-9]+\..+?(?=\s[0-9]+\.)  Regex to read all moves
 
 		BufferedReader br = null;
-		PieceList P = new PieceList();
+		/** P has every piece in it. Every piece has their own capture, check, and move history. After the buffered
+		 * reader is done, a piece will have concatenated Move Histories for adjacent games in the PGN file. A single
+		 * output JSON file will include the move, capture and check data of all the games in a PGN file. **/
+		PieceList P = new PieceList(); 
 
 		try{
 			String currentLine;
 			br=new BufferedReader(new FileReader( //PGN to read
-					"/Users/ethangottlieb/Documents/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
+					"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
 			//iterate through every line
 			while((currentLine = br.readLine()) != null){
 
@@ -43,7 +46,7 @@ public class PGNRread {
 					else P.bELO=currentLine.substring(11,15);
 				}
 
-				//get the PGN string of the game
+				//get the move line of a game and extract moves from it. Append the moves into the PieceList P.
 				if(currentLine.length()>1 && !currentLine.substring(0,1).equals("[")){
 					extractMoves(currentLine, P);
 				}
@@ -60,6 +63,40 @@ public class PGNRread {
 				ex.printStackTrace();
 			}
 		}
+		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Pieces into a JSON file
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(new BufferedWriter(new FileWriter("JSONoutput.txt", false)));
+			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.wELO)); // TODO make these values arrays to show
+			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.bELO)); // ELOs for different games in a list.
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		}
+
+		for (Piece piece :  P.allPieces){ //iterate through all pieces
+			Enumeration<String[]> e = piece.moveHistory.elements();
+
+			try
+			{
+				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(piece)); //print all instance variables of the piece   	  
+			} catch (JsonGenerationException a)
+			{
+				a.printStackTrace();
+			} catch (JsonMappingException a)
+			{
+				a.printStackTrace();
+			} catch (IOException a)
+			{
+				a.printStackTrace();
+			}
+
+			while(e.hasMoreElements()){
+				System.out.print(Arrays.toString(e.nextElement()) + " ");
+			}
+			System.out.println();
+		}
+		out.close();
 		return null;
 	}
 
@@ -120,39 +157,10 @@ public class PGNRread {
 					}
 				}
 			}
-			//TODO Check for edge cases
+			//TODO Check for edge cases like en-passant or promotion
 			checkChecks(whiteMove,moveNumber,true,lastMovedWhitePiece);
 			checkChecks(blackMove,moveNumber,false,lastMovedBlackPiece);
-		}
-		// TODO: READ MULTIPLE GAMES
-		
-		
-		ObjectMapper mapper = new ObjectMapper();
-		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("JSONoutput.txt", false)));
-
-		for (Piece piece :  P.allPieces){
-			Enumeration<String[]> e = piece.moveHistory.elements();
-
-			try
-			{
-				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(piece));	    	  
-			} catch (JsonGenerationException a)
-			{
-				a.printStackTrace();
-			} catch (JsonMappingException a)
-			{
-				a.printStackTrace();
-			} catch (IOException a)
-			{
-				a.printStackTrace();
-			}
-
-			while(e.hasMoreElements()){
-				System.out.print(Arrays.toString(e.nextElement()) + " ");
-			}
-			System.out.println();
-		}
-		out.close();
+		} 
 	}
 	
 	private static void checkChecks(String move,String moveNumber, boolean isWhite, Piece lastMovedPiece){
@@ -162,7 +170,7 @@ public class PGNRread {
 	}
 	
 	private static void checkCastling(String move,String moveNumber ,boolean isWhite, PieceList P){
-		if(move.charAt(0)=='O'){
+		if(move.charAt(0)=='O'){ // check if castling and update the move histories of different pieces.
 			if(move.length()>4){
 				if(isWhite){
 					P.wK.setLocation("c1");
@@ -455,7 +463,7 @@ public class PGNRread {
 		return a;
 	}
 
-	private static boolean isEmptyBetween(PieceList P, String destinationLocation, String currentLocation){ //TODO check this
+	private static boolean isEmptyBetween(PieceList P, String destinationLocation, String currentLocation){ 
 		char currentColumn = currentLocation.charAt(0);
 		char currentRank = currentLocation.charAt(1);
 		char destinationColumn = destinationLocation.charAt(0);
@@ -481,7 +489,7 @@ public class PGNRread {
 	}
 	
 	/*
-	private static boolean isEmptyBetweenDiagonal(PieceList P, String destinationLocation, String currentLocation){ //TODO check this
+	private static boolean isEmptyBetweenDiagonal(PieceList P, String destinationLocation, String currentLocation){ 
 		char currentColumn = currentLocation.charAt(0);
 		char currentRank = currentLocation.charAt(1);
 		char destinationColumn = destinationLocation.charAt(0);
@@ -540,6 +548,7 @@ public class PGNRread {
 
 	public static void main(String[] argv){
 		 parsePGN();
+		 
 
 		//PieceList p =new PieceList();
 		//System.out.println(isEmptyBetween(p, "c3", "e3"));
