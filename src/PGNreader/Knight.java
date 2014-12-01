@@ -1,3 +1,4 @@
+
 package PGNreader;
 
 public class Knight extends Piece {

@@ -17,9 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PGNRread {
 
-	public static String[][] parsePGN(){
+	public static void parsePGN(){
 	
-	//  [0-9]+\..+?(?=\s[0-9]+\.)  Regex to read all moves
+	//  [0-9]+\..+?(?=\s[0-9]+\.)  Regex to read all moves, except the last move
 
 		BufferedReader br = null;
 		/** P has every piece in it. Every piece has their own capture, check, and move history. After the buffered
@@ -37,20 +37,20 @@ public class PGNRread {
 				//get ELOs and change ELO fields in PieceList
 				if(currentLine.length()>7 && currentLine.substring(0,7).equals("[WhiteE")){
 					if(currentLine.substring(14,15).equals("\""))
-						P.wELO=currentLine.substring(11,14);
-					else P.wELO=currentLine.substring(11,15);
+						P.wELO.add(currentLine.substring(11,14));
+					else P.wELO.add(currentLine.substring(11,15));
 				}
 				if(currentLine.length()>7 && currentLine.substring(0,7).equals("[BlackE")){
 					if(currentLine.substring(14,15).equals("\""))
-						P.bELO=currentLine.substring(11,14);
-					else P.bELO=currentLine.substring(11,15);
+						P.bELO.add(currentLine.substring(11,14));
+					else P.bELO.add(currentLine.substring(11,15));
 				}
 
 				//get the move line of a game and extract moves from it. Append the moves into the PieceList P.
 				if(currentLine.length()>1 && !currentLine.substring(0,1).equals("[")){
 					extractMoves(currentLine, P);
 				}
-
+				
 			}
 		}
 		catch(IOException e){
@@ -63,19 +63,24 @@ public class PGNRread {
 				ex.printStackTrace();
 			}
 		}
+		
+		printToJSON(P);
+	}
+	
+	public static void printToJSON(PieceList P){
 		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Pieces into a JSON file
 		PrintWriter out = null;
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter("JSONoutput.txt", false)));
-			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.wELO)); // TODO make these values arrays to show
-			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.bELO)); // ELOs for different games in a list.
+			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.wELO)); 
+			out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(P.bELO));
 		} catch (IOException e1) {
 			
 			e1.printStackTrace();
 		}
 
 		for (Piece piece :  P.allPieces){ //iterate through all pieces
-			Enumeration<String[]> e = piece.moveHistory.elements();
+			//Enumeration<String[]> e = piece.moveHistory.elements();
 
 			try
 			{
@@ -91,13 +96,12 @@ public class PGNRread {
 				a.printStackTrace();
 			}
 
-			while(e.hasMoreElements()){
+			/**while(e.hasMoreElements()){
 				System.out.print(Arrays.toString(e.nextElement()) + " ");
 			}
-			System.out.println();
-		}
-		out.close();
-		return null;
+			System.out.println();**/
+		} 
+		out.close();	
 	}
 
 	public static void extractMoves(String movesString, PieceList P) throws IOException{
@@ -164,7 +168,7 @@ public class PGNRread {
 	}
 	
 	private static void checkChecks(String move,String moveNumber, boolean isWhite, Piece lastMovedPiece){
-		if(move.charAt(move.length()-1)== '+'){
+		if(move.charAt(move.length()-1)== '+' && lastMovedPiece != null){
 			lastMovedPiece.checkHistory.add(moveNumber);
 		}
 	}
@@ -238,12 +242,14 @@ public class PGNRread {
 
 	private static void addCapture(String moveLoc, String moveNumber, PieceList P, Piece movedPiece) {
 		String capturedPiece = "";
+
 		for (Piece piece :  P.allPieces){
 			if (piece.getLocation().equals(moveLoc)){
 				capturedPiece = piece.getOrigin();
 				piece.setLocation("captured at " + moveLoc + " by " +  movedPiece.getOrigin()+ movedPiece.getPiece() + " on move "+ moveNumber);
 				String[] killedString = {movedPiece.getOrigin() + movedPiece.getPiece(),moveNumber};
-				piece.killedBy= killedString;
+				
+				piece.killedBy.add(killedString);
 			}
 		}
 		String[] captureEntry = {moveNumber,capturedPiece};
@@ -547,9 +553,9 @@ public class PGNRread {
 	}
 
 	public static void main(String[] argv){
-		 parsePGN();
-		 
-
+		parsePGN();
+		//Piece p = new Piece();
+		//System.out.println(p.getClass().getSimpleName().equals("Piece"));
 		//PieceList p =new PieceList();
 		//System.out.println(isEmptyBetween(p, "c3", "e3"));
 

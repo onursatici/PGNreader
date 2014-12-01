@@ -9,9 +9,9 @@ public class Piece {
 	private String color ="";
 	private String location = "";
 	public Vector<String[]> moveHistory=new Vector<String[]>(10);
-	public Vector<String> checkHistory=new Vector<String>(5);
+	public Vector<String> checkHistory=new Vector<String>();
 	public Vector<String[]> captureHistory=new Vector<String[]>(5);
-	public String[] killedBy= new String[2];
+	public Vector<String[]> killedBy=new Vector<String[]>(5);
 	
 	public void setLocation(String loc){
 		this.location= loc;

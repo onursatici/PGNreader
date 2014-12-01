@@ -1,5 +1,7 @@
 package PGNreader;
 
+import java.util.ArrayList;
+
 public class PieceList {
 	Pawn wA = new Pawn("a2","white");
 	Pawn wB = new Pawn("b2","white");
@@ -43,8 +45,8 @@ public class PieceList {
 	
 	Piece[] allPieces = {wA,wB,wC,wD,wE,wF,wG,wH,wRQ,wNQ,wBQ,wQ,wK,wBK,wNK,wRK,bA,bB,bC,bD,bE,bF,bG,bH,bRQ,bNQ,bBQ,bQ,bK,bBK,bNK,bRK};
 	
-	String wELO = "";
-	String bELO = "";
+	ArrayList<String> wELO= new ArrayList<String>();
+	ArrayList<String> bELO= new ArrayList<String>();
 	
 	public static void main(String[] argv){
 		PieceList p = new PieceList();
