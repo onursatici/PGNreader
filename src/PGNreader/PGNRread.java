@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,11 +103,15 @@ public class PGNRread {
 	}
 
 	public static void extractMoves(String movesString, PieceList P) throws IOException{
-		Pattern pattern = Pattern.compile("[0-9]+\\..+?(?=\\s[0-9]+\\.)"); // regex to extract each move e.g "1. d4 d6"  \\s[0-9]+
-		// TODO add regex for last move
+		Pattern pattern = Pattern.compile("[0-9]+\\..+?(?=(\\s[0-9]+\\.))"); // regex to extract each move e.g "1. d4 d6"  \\s[0-9]+
+		// TODO add regex for last move   [0-9]+\\..+?(?=\\s[0-9]+\\.
 		Matcher matcher = pattern.matcher(movesString);
 		String[] hit = new String[3];
-
+		for(Piece piece : P.allPieces){
+			String[] moveEntry = {"0", piece.getOrigin()};
+			piece.moveHistory.add(moveEntry);	
+			piece.setLocation(piece.getOrigin());
+		}
 		while(matcher.find()){
 			//hit[0] includes the move number, hit[1] -> white move hit[2] -> black move
 			hit=matcher.group().split(" ");
@@ -165,6 +167,7 @@ public class PGNRread {
 			checkChecks(whiteMove,moveNumber,true,lastMovedWhitePiece);
 			checkChecks(blackMove,moveNumber,false,lastMovedBlackPiece);
 		} 
+		//Add here for checkmate / elo/ move number
 	}
 	
 	private static void checkChecks(String move,String moveNumber, boolean isWhite, Piece lastMovedPiece){

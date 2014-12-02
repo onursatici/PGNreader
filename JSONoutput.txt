@@ -4,128 +4,128 @@
   "piece" : "Pawn",
   "origin" : "a2",
   "color" : "white",
-  "location" : "captured at a5 by d8Queen on move 27",
-  "moveHistory" : [ [ "0", "a2" ], [ "22", "a4" ], [ "31", "a5" ] ],
+  "location" : "a3",
+  "moveHistory" : [ [ "0", "a2" ], [ "0", "a2" ], [ "0", "a2" ], [ "22", "a4" ], [ "31", "a5" ], [ "0", "a2" ], [ "3", "a4" ], [ "21", "a5" ], [ "0", "a2" ], [ "0", "a2" ], [ "11", "a3" ], [ "15", "b4" ], [ "0", "a2" ], [ "11", "a3" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "d8Queen", "27" ] ]
+  "captureHistory" : [ [ "15", "b7" ] ],
+  "killedBy" : [ [ "d8Queen", "27" ], [ "c7Pawn", "15" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "b2",
   "color" : "white",
-  "location" : "captured at b2 by d8Queen on move 33",
-  "moveHistory" : [ [ "0", "b2" ] ],
+  "location" : "b2",
+  "moveHistory" : [ [ "0", "b2" ], [ "0", "b2" ], [ "0", "b2" ], [ "0", "b2" ], [ "13", "b3" ], [ "0", "b2" ], [ "9", "b3" ], [ "14", "c4" ], [ "0", "b2" ], [ "0", "b2" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "d8Queen", "33" ] ]
+  "captureHistory" : [ [ "14", "c7" ] ],
+  "killedBy" : [ [ "d8Queen", "33" ], [ "d7Pawn", "14" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "c2",
   "color" : "white",
-  "location" : "captured at d4 by b8Knight on move 7",
-  "moveHistory" : [ [ "0", "c2" ], [ "5", "c3" ], [ "7", "d4" ] ],
+  "location" : "captured at c4 by g8Knight on move 16",
+  "moveHistory" : [ [ "0", "c2" ], [ "0", "c2" ], [ "5", "c3" ], [ "7", "d4" ], [ "0", "c2" ], [ "9", "c4" ], [ "0", "c2" ], [ "1", "c4" ], [ "0", "c2" ], [ "17", "c3" ], [ "0", "c2" ], [ "0", "c2" ], [ "8", "c4" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ [ "7", "e7" ] ],
-  "killedBy" : [ [ "b8Knight", "7" ] ]
+  "killedBy" : [ [ "b8Knight", "7" ], [ "b7Pawn", "21" ], [ "d8Queen", "16" ], [ "g8Knight", "16" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "d2",
   "color" : "white",
-  "location" : "captured at d4 by e7Pawn on move 6",
-  "moveHistory" : [ [ "0", "d2" ], [ "6", "d4" ] ],
+  "location" : "d4",
+  "moveHistory" : [ [ "0", "d2" ], [ "0", "d2" ], [ "6", "d4" ], [ "0", "d2" ], [ "24", "d3" ], [ "0", "d2" ], [ "27", "d3" ], [ "0", "d2" ], [ "2", "d4" ], [ "0", "d2" ], [ "9", "d3" ], [ "0", "d2" ], [ "3", "d4" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
-  "killedBy" : [ [ "e7Pawn", "6" ] ]
+  "killedBy" : [ [ "e7Pawn", "6" ], [ "d7Pawn", "28" ], [ "d8Queen", "18" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "e2",
   "color" : "white",
-  "location" : "captured at e5 by d7Pawn on move 9",
-  "moveHistory" : [ [ "0", "e2" ], [ "1", "e4" ], [ "8", "e5" ] ],
+  "location" : "captured at d5 by g8Knight on move 3",
+  "moveHistory" : [ [ "0", "e2" ], [ "0", "e2" ], [ "1", "e4" ], [ "8", "e5" ], [ "0", "e2" ], [ "1", "e4" ], [ "0", "e2" ], [ "2", "e4" ], [ "0", "e2" ], [ "1", "e4" ], [ "6", "e5" ], [ "0", "e2" ], [ "1", "e4" ], [ "18", "f5" ], [ "27", "g6" ], [ "0", "e2" ], [ "1", "e4" ], [ "2", "d5" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "d7Pawn", "9" ] ]
+  "captureHistory" : [ [ "18", "e7" ], [ "27", "g7" ], [ "2", "d7" ] ],
+  "killedBy" : [ [ "d7Pawn", "9" ], [ "g8Knight", "12" ], [ "g8Knight", "4" ], [ "h7Pawn", "27" ], [ "g8Knight", "3" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "f2",
   "color" : "white",
-  "location" : "g6",
-  "moveHistory" : [ [ "0", "f2" ], [ "3", "f4" ], [ "17", "f5" ], [ "27", "g6" ] ],
+  "location" : "f2",
+  "moveHistory" : [ [ "0", "f2" ], [ "0", "f2" ], [ "0", "f2" ], [ "0", "f2" ], [ "0", "f2" ], [ "0", "f2" ], [ "3", "f4" ], [ "17", "f5" ], [ "0", "f2" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "27", "f7" ] ],
-  "killedBy" : [ ]
+  "captureHistory" : [ ],
+  "killedBy" : [ [ "f8Bishop", "9" ], [ "e7Pawn", "17" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "g2",
   "color" : "white",
-  "location" : "captured at f3 by d1Queen on move 12",
-  "moveHistory" : [ [ "0", "g2" ], [ "9", "f3" ] ],
+  "location" : "g2",
+  "moveHistory" : [ [ "0", "g2" ], [ "0", "g2" ], [ "9", "f3" ], [ "0", "g2" ], [ "16", "g3" ], [ "0", "g2" ], [ "6", "g3" ], [ "8", "g4" ], [ "10", "g5" ], [ "0", "g2" ], [ "28", "g4" ], [ "0", "g2" ], [ "0", "g2" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ [ "9", "b8" ] ],
-  "killedBy" : [ [ "d1Queen", "12" ] ]
+  "killedBy" : [ [ "f8Bishop", "12" ], [ "d8Queen", "32" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "h2",
   "color" : "white",
-  "location" : "captured at h2 by d8Queen on move 4",
-  "moveHistory" : [ [ "0", "h2" ] ],
+  "location" : "h3",
+  "moveHistory" : [ [ "0", "h2" ], [ "0", "h2" ], [ "0", "h2" ], [ "0", "h2" ], [ "16", "h3" ], [ "18", "h4" ], [ "24", "h5" ], [ "26", "g6" ], [ "0", "h2" ], [ "0", "h2" ], [ "32", "h3" ], [ "0", "h2" ], [ "7", "h3" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "d8Queen", "4" ] ]
+  "captureHistory" : [ [ "26", "g7" ] ],
+  "killedBy" : [ [ "d8Queen", "4" ], [ "f7Pawn", "26" ] ]
 }
 {
   "piece" : "Rook",
   "origin" : "a1",
   "color" : "white",
-  "location" : "captured at b1 by d8Queen on move 31",
-  "moveHistory" : [ [ "0", "a1" ], [ "10", "b1" ], [ "20", "a1" ], [ "26", "b1" ] ],
+  "location" : "a1",
+  "moveHistory" : [ [ "0", "a1" ], [ "0", "a1" ], [ "0", "a1" ], [ "10", "b1" ], [ "20", "a1" ], [ "26", "b1" ], [ "0", "a1" ], [ "4", "a3" ], [ "5", "f3" ], [ "0", "a1" ], [ "0", "a1" ], [ "0", "a1" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
-  "killedBy" : [ [ "d8Queen", "31" ] ]
+  "killedBy" : [ [ "d8Queen", "31" ], [ "g8Knight", "8" ] ]
 }
 {
   "piece" : "Knight",
   "origin" : "b1",
   "color" : "white",
-  "location" : "captured at c4 by b7Pawn on move 21",
-  "moveHistory" : [ [ "0", "b1" ], [ "15", "a3" ], [ "19", "c4" ] ],
-  "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "b7Pawn", "21" ] ]
+  "location" : "b5",
+  "moveHistory" : [ [ "0", "b1" ], [ "0", "b1" ], [ "15", "a3" ], [ "19", "c4" ], [ "0", "b1" ], [ "6", "c3" ], [ "7", "e2" ], [ "27", "g1" ], [ "0", "b1" ], [ "20", "c3" ], [ "22", "d5" ], [ "25", "e3" ], [ "0", "b1" ], [ "3", "c3" ], [ "11", "b5" ], [ "12", "d6" ], [ "19", "c8" ], [ "0", "b1" ], [ "2", "c3" ], [ "16", "e2" ], [ "26", "g1" ], [ "0", "b1" ], [ "13", "c3" ], [ "14", "b5" ] ],
+  "checkHistory" : [ "12" ],
+  "captureHistory" : [ [ "27", "f8" ], [ "11", "b7" ], [ "19", "a8" ] ],
+  "killedBy" : [ [ "d8Queen", "27" ], [ "c8Bishop", "19" ] ]
 }
 {
   "piece" : "Bishop",
   "origin" : "c1",
   "color" : "white",
-  "location" : "captured at e3 by f8Bishop on move 16",
-  "moveHistory" : [ [ "0", "c1" ], [ "16", "e3" ] ],
+  "location" : "b8",
+  "moveHistory" : [ [ "0", "c1" ], [ "0", "c1" ], [ "16", "e3" ], [ "0", "c1" ], [ "0", "c1" ], [ "14", "b2" ], [ "0", "c1" ], [ "8", "e3" ], [ "10", "d2" ], [ "0", "c1" ], [ "14", "d2" ], [ "21", "b4" ], [ "22", "e7" ], [ "0", "c1" ], [ "9", "e3" ], [ "17", "f4" ], [ "18", "b8" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "f8Bishop", "16" ] ]
+  "captureHistory" : [ [ "21", "c7" ], [ "22", "f8" ], [ "18", "d8" ] ],
+  "killedBy" : [ [ "f8Bishop", "16" ], [ "d7Pawn", "30" ], [ "f8Bishop", "11" ], [ "e8King", "22" ] ]
 }
 {
   "piece" : "Queen",
   "origin" : "d1",
   "color" : "white",
-  "location" : "d2",
-  "moveHistory" : [ [ "0", "d1" ], [ "13", "d3" ], [ "14", "b3" ], [ "17", "e3" ], [ "18", "c1" ], [ "12", "c2" ], [ "14", "d3" ], [ "15", "f3" ], [ "21", "h5" ], [ "23", "g5" ], [ "25", "f6" ], [ "7", "c2" ], [ "11", "e4" ], [ "12", "f3" ], [ "19", "e3" ], [ "23", "f3" ], [ "13", "d2" ], [ "18", "f4" ], [ "29", "f6" ], [ "10", "e1" ], [ "12", "g3" ], [ "13", "h3" ], [ "28", "e3" ], [ "29", "h3" ], [ "30", "e3" ], [ "31", "g3" ], [ "33", "g2" ], [ "10", "c2" ], [ "15", "d2" ] ],
+  "location" : "captured at d2 by g8Knight on move 17",
+  "moveHistory" : [ [ "0", "d1" ], [ "0", "d1" ], [ "13", "d3" ], [ "14", "b3" ], [ "17", "e3" ], [ "18", "c1" ], [ "0", "d1" ], [ "12", "c2" ], [ "14", "d3" ], [ "15", "f3" ], [ "21", "h5" ], [ "23", "g5" ], [ "25", "f6" ], [ "0", "d1" ], [ "7", "c2" ], [ "11", "e4" ], [ "12", "f3" ], [ "19", "e3" ], [ "23", "f3" ], [ "0", "d1" ], [ "13", "d2" ], [ "18", "f4" ], [ "29", "f6" ], [ "0", "d1" ], [ "10", "e1" ], [ "12", "g3" ], [ "13", "h3" ], [ "28", "e3" ], [ "29", "h3" ], [ "30", "e3" ], [ "31", "g3" ], [ "33", "g2" ], [ "0", "d1" ], [ "10", "c2" ], [ "15", "d2" ] ],
   "checkHistory" : [ "29", "28", "29", "30", "31" ],
-  "captureHistory" : [ [ "17", "f8" ], [ "12", "g2" ], [ "13", "" ], [ "33", "d8" ] ],
-  "killedBy" : [ [ "g7Pawn", "25" ], [ "g8Knight", "33" ] ]
+  "captureHistory" : [ [ "17", "f8" ], [ "12", "b8" ], [ "13", "f8" ], [ "33", "d8" ] ],
+  "killedBy" : [ [ "g7Pawn", "25" ], [ "g8Knight", "33" ], [ "g8Knight", "17" ] ]
 }
 {
   "piece" : "King",
   "origin" : "e1",
   "color" : "white",
   "location" : "g1",
-  "moveHistory" : [ [ "0", "e1" ], [ "4", "g1" ], [ "8", "f1" ], [ "17", "e1" ], [ "28", "d2" ], [ "29", "c3" ], [ "30", "b3" ], [ "32", "a3" ], [ "33", "a4" ], [ "28", "d1" ], [ "7", "g1" ], [ "7", "g1" ], [ "8", "h1" ], [ "6", "g1" ] ],
+  "moveHistory" : [ [ "0", "e1" ], [ "0", "e1" ], [ "4", "g1" ], [ "0", "e1" ], [ "8", "f1" ], [ "17", "e1" ], [ "28", "d2" ], [ "29", "c3" ], [ "30", "b3" ], [ "32", "a3" ], [ "33", "a4" ], [ "0", "e1" ], [ "28", "d1" ], [ "0", "e1" ], [ "7", "g1" ], [ "0", "e1" ], [ "7", "g1" ], [ "8", "h1" ], [ "0", "e1" ], [ "6", "g1" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ [ "30", "b7" ] ],
   "killedBy" : [ ]
@@ -134,38 +134,38 @@
   "piece" : "Bishop",
   "origin" : "f1",
   "color" : "white",
-  "location" : "captured at b3 by b7Pawn on move 22",
-  "moveHistory" : [ [ "0", "f1" ], [ "3", "c4" ], [ "10", "d5" ], [ "11", "e4" ], [ "18", "c2" ], [ "19", "b3" ] ],
-  "checkHistory" : [ ],
-  "captureHistory" : [ [ "18", "" ] ],
-  "killedBy" : [ [ "b7Pawn", "22" ] ]
+  "location" : "captured at f3 by g8Knight on move 18",
+  "moveHistory" : [ [ "0", "f1" ], [ "0", "f1" ], [ "3", "c4" ], [ "10", "d5" ], [ "11", "e4" ], [ "0", "f1" ], [ "4", "b5" ], [ "5", "a4" ], [ "18", "c2" ], [ "19", "b3" ], [ "0", "f1" ], [ "15", "d3" ], [ "17", "e4" ], [ "0", "f1" ], [ "5", "e2" ], [ "15", "c4" ], [ "26", "e6" ], [ "27", "f5" ], [ "0", "f1" ], [ "5", "b5" ], [ "6", "d7" ], [ "0", "f1" ], [ "5", "e2" ], [ "16", "f3" ] ],
+  "checkHistory" : [ "5", "6" ],
+  "captureHistory" : [ [ "18", "b8" ], [ "15", "d7" ], [ "26", "e7" ], [ "27", "g8" ], [ "6", "c8" ], [ "16", "c8" ] ],
+  "killedBy" : [ [ "b7Pawn", "22" ], [ "b8Knight", "6" ], [ "g8Knight", "18" ] ]
 }
 {
   "piece" : "Knight",
   "origin" : "g1",
   "color" : "white",
-  "location" : "captured at f3 by b8Knight on move 8",
-  "moveHistory" : [ [ "0", "g1" ], [ "2", "f3" ] ],
+  "location" : "captured at f3 by c8Bishop on move 15",
+  "moveHistory" : [ [ "0", "g1" ], [ "0", "g1" ], [ "2", "f3" ], [ "0", "g1" ], [ "2", "f3" ], [ "11", "g5" ], [ "13", "e4" ], [ "0", "g1" ], [ "9", "f3" ], [ "0", "g1" ], [ "4", "f3" ], [ "16", "g5" ], [ "20", "e4" ], [ "21", "c5" ], [ "0", "g1" ], [ "4", "f3" ], [ "24", "e5" ], [ "0", "g1" ], [ "4", "f3" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ [ "b8Knight", "8" ] ]
+  "captureHistory" : [ [ "13", "g8" ], [ "9", "g8" ], [ "24", "b8" ] ],
+  "killedBy" : [ [ "b8Knight", "8" ], [ "d7Pawn", "24" ], [ "b8Knight", "11" ], [ "f7Pawn", "24" ], [ "c8Bishop", "15" ] ]
 }
 {
   "piece" : "Rook",
   "origin" : "h1",
   "color" : "white",
   "location" : "d1",
-  "moveHistory" : [ [ "0", "h1" ], [ "4", "f1" ], [ "12", "e1" ], [ "3", "g1" ], [ "7", "f1" ], [ "7", "f1" ], [ "6", "f1" ], [ "12", "d1" ] ],
+  "moveHistory" : [ [ "0", "h1" ], [ "0", "h1" ], [ "4", "f1" ], [ "12", "e1" ], [ "0", "h1" ], [ "3", "g1" ], [ "0", "h1" ], [ "0", "h1" ], [ "7", "f1" ], [ "0", "h1" ], [ "7", "f1" ], [ "0", "h1" ], [ "6", "f1" ], [ "12", "d1" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
-  "killedBy" : [ [ "d8Queen", "27" ], [ "d8Queen", "25" ] ]
+  "killedBy" : [ [ "f8Bishop", "13" ], [ "d8Queen", "25" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "a7",
   "color" : "black",
-  "location" : "a5",
-  "moveHistory" : [ [ "0", "a7" ], [ "21", "a6" ], [ "21", "a5" ] ],
+  "location" : "a7",
+  "moveHistory" : [ [ "0", "a7" ], [ "0", "a7" ], [ "0", "a7" ], [ "0", "a7" ], [ "21", "a6" ], [ "0", "a7" ], [ "13", "a6" ], [ "21", "a5" ], [ "0", "a7" ], [ "11", "a6" ], [ "0", "a7" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
   "killedBy" : [ ]
@@ -174,70 +174,70 @@
   "piece" : "Pawn",
   "origin" : "b7",
   "color" : "black",
-  "location" : "captured at b3 by e1King on move 30",
-  "moveHistory" : [ [ "0", "b7" ], [ "18", "b6" ], [ "20", "b5" ], [ "21", "c4" ], [ "22", "b3" ] ],
+  "location" : "b7",
+  "moveHistory" : [ [ "0", "b7" ], [ "0", "b7" ], [ "0", "b7" ], [ "18", "b6" ], [ "20", "b5" ], [ "21", "c4" ], [ "22", "b3" ], [ "0", "b7" ], [ "0", "b7" ], [ "10", "b5" ], [ "0", "b7" ], [ "10", "b5" ], [ "14", "b4" ], [ "0", "b7" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "21", "b1" ], [ "22", "f1" ] ],
-  "killedBy" : [ [ "e1King", "30" ] ]
+  "captureHistory" : [ [ "21", "c2" ], [ "22", "f1" ] ],
+  "killedBy" : [ [ "e1King", "30" ], [ "b1Knight", "11" ], [ "a2Pawn", "15" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "c7",
   "color" : "black",
-  "location" : "c4",
-  "moveHistory" : [ [ "0", "c7" ], [ "10", "c6" ], [ "2", "c5" ], [ "8", "c4" ] ],
+  "location" : "c5",
+  "moveHistory" : [ [ "0", "c7" ], [ "0", "c7" ], [ "10", "c6" ], [ "0", "c7" ], [ "19", "c6" ], [ "0", "c7" ], [ "2", "c5" ], [ "0", "c7" ], [ "5", "c6" ], [ "7", "c5" ], [ "8", "c4" ], [ "0", "c7" ], [ "1", "c5" ], [ "15", "b4" ], [ "0", "c7" ], [ "9", "c6" ], [ "11", "c5" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
-  "killedBy" : [ ]
+  "captureHistory" : [ [ "15", "a2" ] ],
+  "killedBy" : [ [ "b2Pawn", "14" ], [ "c1Bishop", "21" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "d7",
   "color" : "black",
-  "location" : "captured at e5 by g7Pawn on move 24",
-  "moveHistory" : [ [ "0", "d7" ], [ "4", "d6" ], [ "9", "e5" ] ],
+  "location" : "captured at d5 by e2Pawn on move 2",
+  "moveHistory" : [ [ "0", "d7" ], [ "0", "d7" ], [ "4", "d6" ], [ "9", "e5" ], [ "0", "d7" ], [ "14", "d6" ], [ "23", "d5" ], [ "24", "e4" ], [ "28", "d3" ], [ "29", "d2" ], [ "30", "c1" ], [ "0", "d7" ], [ "14", "d6" ], [ "0", "d7" ], [ "2", "d6" ], [ "6", "d5" ], [ "14", "c4" ], [ "0", "d7" ], [ "2", "d6" ], [ "19", "d5" ], [ "0", "d7" ], [ "1", "d5" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "9", "e2" ] ],
-  "killedBy" : [ [ "g7Pawn", "24" ] ]
+  "captureHistory" : [ [ "9", "e2" ], [ "24", "g1" ], [ "28", "d2" ], [ "30", "c1" ], [ "14", "b2" ] ],
+  "killedBy" : [ [ "f1Bishop", "15" ], [ "e2Pawn", "2" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "e7",
   "color" : "black",
-  "location" : "captured at d4 by c2Pawn on move 7",
-  "moveHistory" : [ [ "0", "e7" ], [ "1", "e5" ], [ "6", "d4" ] ],
+  "location" : "e6",
+  "moveHistory" : [ [ "0", "e7" ], [ "0", "e7" ], [ "1", "e5" ], [ "6", "d4" ], [ "0", "e7" ], [ "1", "e5" ], [ "0", "e7" ], [ "1", "e5" ], [ "0", "e7" ], [ "1", "e6" ], [ "0", "e7" ], [ "4", "e6" ], [ "17", "f5" ], [ "0", "e7" ], [ "5", "e6" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "6", "d2" ] ],
-  "killedBy" : [ [ "c2Pawn", "7" ] ]
+  "captureHistory" : [ [ "6", "d2" ], [ "17", "f2" ] ],
+  "killedBy" : [ [ "c2Pawn", "7" ], [ "f1Bishop", "26" ], [ "e2Pawn", "18" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "f7",
   "color" : "black",
-  "location" : "captured at g6 by f2Pawn on move 27",
-  "moveHistory" : [ [ "0", "f7" ], [ "26", "g6" ] ],
+  "location" : "f7",
+  "moveHistory" : [ [ "0", "f7" ], [ "0", "f7" ], [ "0", "f7" ], [ "0", "f7" ], [ "26", "g6" ], [ "0", "f7" ], [ "0", "f7" ], [ "21", "f6" ], [ "24", "e5" ], [ "0", "f7" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "26", "" ] ],
-  "killedBy" : [ [ "f2Pawn", "27" ] ]
+  "captureHistory" : [ [ "26", "h2" ], [ "24", "g1" ] ],
+  "killedBy" : [ [ "e8King", "26" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "g7",
   "color" : "black",
-  "location" : "captured at e5 by e8King on move 26",
-  "moveHistory" : [ [ "0", "g7" ], [ "25", "f6" ], [ "24", "e5" ] ],
+  "location" : "g7",
+  "moveHistory" : [ [ "0", "g7" ], [ "0", "g7" ], [ "0", "g7" ], [ "25", "f6" ], [ "0", "g7" ], [ "19", "g6" ], [ "0", "g7" ], [ "22", "g6" ], [ "0", "g7" ], [ "13", "g6" ], [ "0", "g7" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "25", "d1" ], [ "24", "d7" ] ],
-  "killedBy" : [ [ "e8King", "26" ] ]
+  "captureHistory" : [ [ "25", "d1" ] ],
+  "killedBy" : [ [ "h2Pawn", "26" ], [ "e2Pawn", "27" ] ]
 }
 {
   "piece" : "Pawn",
   "origin" : "h7",
   "color" : "black",
-  "location" : "h6",
-  "moveHistory" : [ [ "0", "h7" ], [ "25", "h6" ] ],
+  "location" : "h7",
+  "moveHistory" : [ [ "0", "h7" ], [ "0", "h7" ], [ "0", "h7" ], [ "0", "h7" ], [ "25", "h6" ], [ "0", "h7" ], [ "0", "h7" ], [ "27", "g6" ], [ "0", "h7" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ ],
+  "captureHistory" : [ [ "27", "e2" ] ],
   "killedBy" : [ ]
 }
 {
@@ -245,78 +245,78 @@
   "origin" : "a8",
   "color" : "black",
   "location" : "c8",
-  "moveHistory" : [ [ "0", "a8" ], [ "13", "d8" ], [ "17", "c8" ], [ "13", "c8" ] ],
+  "moveHistory" : [ [ "0", "a8" ], [ "0", "a8" ], [ "13", "d8" ], [ "0", "a8" ], [ "0", "a8" ], [ "20", "ab" ], [ "0", "a8" ], [ "17", "c8" ], [ "0", "a8" ], [ "0", "a8" ], [ "13", "c8" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
-  "killedBy" : [ [ "c8Bishop", "19" ] ]
+  "killedBy" : [ [ "b1Knight", "19" ] ]
 }
 {
   "piece" : "Knight",
   "origin" : "b8",
   "color" : "black",
-  "location" : "captured at f3 by g2Pawn on move 9",
-  "moveHistory" : [ [ "0", "b8" ], [ "2", "c6" ], [ "7", "d4" ], [ "8", "f3" ] ],
-  "checkHistory" : [ "8" ],
-  "captureHistory" : [ [ "7", "c2" ], [ "8", "g1" ] ],
-  "killedBy" : [ [ "g2Pawn", "9" ] ]
+  "location" : "a6",
+  "moveHistory" : [ [ "0", "b8" ], [ "0", "b8" ], [ "2", "c6" ], [ "7", "d4" ], [ "8", "f3" ], [ "0", "b8" ], [ "15", "c6" ], [ "16", "b4" ], [ "17", "c2" ], [ "0", "b8" ], [ "9", "c6" ], [ "10", "d4" ], [ "11", "f3" ], [ "0", "b8" ], [ "15", "c6" ], [ "0", "b8" ], [ "6", "d7" ], [ "20", "e5" ], [ "0", "b8" ], [ "10", "a6" ] ],
+  "checkHistory" : [ "8", "17", "11" ],
+  "captureHistory" : [ [ "7", "c2" ], [ "8", "g1" ], [ "11", "g1" ], [ "6", "f1" ] ],
+  "killedBy" : [ [ "g2Pawn", "9" ], [ "f1Bishop", "18" ], [ "d1Queen", "12" ], [ "g1Knight", "24" ] ]
 }
 {
   "piece" : "Bishop",
   "origin" : "c8",
   "color" : "black",
-  "location" : "f3",
-  "moveHistory" : [ [ "0", "c8" ], [ "11", "h3" ], [ "26", "g4" ], [ "15", "d7" ], [ "24", "e6" ], [ "4", "d7" ], [ "19", "c8" ], [ "23", "d7" ], [ "5", "d7" ], [ "4", "g4" ], [ "7", "h5" ], [ "15", "f3" ] ],
+  "location" : "captured at f3 by f1Bishop on move 16",
+  "moveHistory" : [ [ "0", "c8" ], [ "0", "c8" ], [ "11", "h3" ], [ "0", "c8" ], [ "26", "g4" ], [ "0", "c8" ], [ "15", "d7" ], [ "24", "e6" ], [ "0", "c8" ], [ "4", "d7" ], [ "19", "c8" ], [ "23", "d7" ], [ "0", "c8" ], [ "5", "d7" ], [ "0", "c8" ], [ "4", "g4" ], [ "7", "h5" ], [ "15", "f3" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "19", "h8" ], [ "15", "" ] ],
-  "killedBy" : [ ]
+  "captureHistory" : [ [ "19", "b1" ], [ "15", "g1" ] ],
+  "killedBy" : [ [ "f1Bishop", "6" ], [ "f1Bishop", "16" ] ]
 }
 {
   "piece" : "Queen",
   "origin" : "d8",
   "color" : "black",
-  "location" : "b8",
-  "moveHistory" : [ [ "0", "d8" ], [ "5", "f6" ], [ "19", "g5" ], [ "2", "f6" ], [ "3", "f4" ], [ "4", "h2" ], [ "27", "g1" ], [ "31", "b1" ], [ "32", "e3" ], [ "33", "b2" ], [ "13", "c7" ], [ "16", "c6" ], [ "17", "c7" ], [ "22", "d8" ], [ "27", "a5" ], [ "18", "e7" ], [ "25", "e8" ], [ "7", "b6" ], [ "8", "c6" ], [ "16", "c2" ], [ "18", "d3" ], [ "25", "f1" ], [ "32", "g2" ], [ "12", "c7" ], [ "14", "b8" ] ],
+  "location" : "captured at b8 by c1Bishop on move 18",
+  "moveHistory" : [ [ "0", "d8" ], [ "0", "d8" ], [ "5", "f6" ], [ "19", "g5" ], [ "0", "d8" ], [ "2", "f6" ], [ "3", "f4" ], [ "4", "h2" ], [ "27", "g1" ], [ "31", "b1" ], [ "32", "e3" ], [ "33", "b2" ], [ "0", "d8" ], [ "13", "c7" ], [ "16", "c6" ], [ "17", "c7" ], [ "22", "d8" ], [ "27", "a5" ], [ "0", "d8" ], [ "18", "e7" ], [ "25", "e8" ], [ "0", "d8" ], [ "7", "b6" ], [ "8", "c6" ], [ "16", "c2" ], [ "18", "d3" ], [ "25", "f1" ], [ "32", "g2" ], [ "0", "d8" ], [ "12", "c7" ], [ "14", "b8" ] ],
   "checkHistory" : [ "19", "27", "32", "27", "25", "32" ],
-  "captureHistory" : [ [ "4", "h2" ], [ "27", "h1" ], [ "31", "a1" ], [ "33", "b2" ], [ "27", "a2" ], [ "16", "" ], [ "18", "" ], [ "25", "h1" ], [ "32", "" ] ],
-  "killedBy" : [ [ "d1Queen", "33" ] ]
+  "captureHistory" : [ [ "4", "h2" ], [ "27", "b1" ], [ "31", "a1" ], [ "33", "b2" ], [ "27", "a2" ], [ "16", "c2" ], [ "18", "d2" ], [ "25", "h1" ], [ "32", "g2" ] ],
+  "killedBy" : [ [ "d1Queen", "33" ], [ "c1Bishop", "18" ] ]
 }
 {
   "piece" : "King",
   "origin" : "e8",
   "color" : "black",
-  "location" : "f5",
-  "moveHistory" : [ [ "0", "e8" ], [ "15", "b8" ], [ "8", "b8" ], [ "6", "b8" ], [ "23", "g7" ], [ "12", "f8" ], [ "24", "g7" ], [ "29", "g8" ], [ "22", "e7" ], [ "23", "d6" ], [ "26", "e5" ], [ "28", "f5" ], [ "29", "g5" ], [ "31", "f5" ] ],
+  "location" : "e8",
+  "moveHistory" : [ [ "0", "e8" ], [ "0", "e8" ], [ "15", "b8" ], [ "0", "e8" ], [ "8", "b8" ], [ "0", "e8" ], [ "6", "b8" ], [ "23", "g7" ], [ "0", "e8" ], [ "12", "f8" ], [ "24", "g7" ], [ "29", "g8" ], [ "0", "e8" ], [ "22", "e7" ], [ "23", "d6" ], [ "26", "e5" ], [ "28", "f5" ], [ "29", "g5" ], [ "31", "f5" ], [ "0", "e8" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "22", "" ], [ "26", "g7" ] ],
+  "captureHistory" : [ [ "22", "c1" ], [ "26", "f7" ] ],
   "killedBy" : [ ]
 }
 {
   "piece" : "Bishop",
   "origin" : "f8",
   "color" : "black",
-  "location" : "captured at e3 by d1Queen on move 17",
-  "moveHistory" : [ [ "0", "f8" ], [ "3", "c5" ], [ "14", "b6" ], [ "16", "e3" ] ],
+  "location" : "e7",
+  "moveHistory" : [ [ "0", "f8" ], [ "0", "f8" ], [ "3", "c5" ], [ "14", "b6" ], [ "16", "e3" ], [ "0", "f8" ], [ "7", "c5" ], [ "9", "f2" ], [ "10", "c5" ], [ "13", "g1" ], [ "0", "f8" ], [ "5", "e7" ], [ "12", "g5" ], [ "18", "f6" ], [ "28", "g5" ], [ "0", "f8" ], [ "3", "e7" ], [ "9", "b4" ], [ "11", "d2" ], [ "0", "f8" ], [ "9", "e7" ], [ "0", "f8" ], [ "6", "e7" ] ],
   "checkHistory" : [ ],
-  "captureHistory" : [ [ "16", "c1" ] ],
-  "killedBy" : [ [ "d1Queen", "17" ] ]
+  "captureHistory" : [ [ "16", "c1" ], [ "9", "f2" ], [ "13", "h1" ], [ "12", "g2" ], [ "11", "c1" ] ],
+  "killedBy" : [ [ "d1Queen", "17" ], [ "b1Knight", "27" ], [ "d1Queen", "13" ], [ "c1Bishop", "22" ] ]
 }
 {
   "piece" : "Knight",
   "origin" : "g8",
   "color" : "black",
-  "location" : "g2",
-  "moveHistory" : [ [ "0", "g8" ], [ "12", "e7" ], [ "17", "d5" ], [ "18", "f4" ], [ "12", "h5" ], [ "30", "f4" ], [ "33", "g2" ] ],
-  "checkHistory" : [ ],
-  "captureHistory" : [ [ "33", "d1" ] ],
-  "killedBy" : [ ]
+  "location" : "f3",
+  "moveHistory" : [ [ "0", "g8" ], [ "0", "g8" ], [ "12", "e7" ], [ "17", "d5" ], [ "18", "f4" ], [ "0", "g8" ], [ "5", "f6" ], [ "6", "g4" ], [ "11", "f2" ], [ "12", "e4" ], [ "0", "g8" ], [ "3", "f6" ], [ "4", "e4" ], [ "7", "g5" ], [ "8", "f3" ], [ "0", "g8" ], [ "16", "h6" ], [ "20", "f5" ], [ "0", "g8" ], [ "3", "f6" ], [ "12", "h5" ], [ "30", "f4" ], [ "33", "g2" ], [ "0", "g8" ], [ "2", "f6" ], [ "3", "d5" ], [ "8", "b6" ], [ "16", "c4" ], [ "17", "d2" ], [ "18", "f3" ] ],
+  "checkHistory" : [ "8", "18" ],
+  "captureHistory" : [ [ "12", "e2" ], [ "4", "e2" ], [ "8", "a1" ], [ "33", "d1" ], [ "3", "e2" ], [ "16", "c2" ], [ "17", "d1" ], [ "18", "f1" ] ],
+  "killedBy" : [ [ "g1Knight", "13" ], [ "g1Knight", "9" ], [ "f1Bishop", "27" ] ]
 }
 {
   "piece" : "Rook",
   "origin" : "h8",
   "color" : "black",
-  "location" : "captured at c8 by c8Bishop on move 19",
-  "moveHistory" : [ [ "0", "h8" ], [ "15", "c8" ], [ "8", "c8" ], [ "6", "c8" ] ],
+  "location" : "h8",
+  "moveHistory" : [ [ "0", "h8" ], [ "0", "h8" ], [ "15", "c8" ], [ "0", "h8" ], [ "8", "c8" ], [ "0", "h8" ], [ "6", "c8" ], [ "0", "h8" ], [ "0", "h8" ], [ "0", "h8" ] ],
   "checkHistory" : [ ],
   "captureHistory" : [ ],
-  "killedBy" : [ [ "c8Bishop", "19" ] ]
+  "killedBy" : [ ]
 }

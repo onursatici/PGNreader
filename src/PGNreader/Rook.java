@@ -6,8 +6,7 @@ public class Rook extends Piece {
 		this.setColor(color);
 		this.setOrigin(startingLoc);
 		this.setPiece(this.getClass().getSimpleName());
-		String[] moveEntry = {"0", startingLoc};
-		this.moveHistory.add(moveEntry);
+	
 	}
 
 	public boolean canMove(String loc){
