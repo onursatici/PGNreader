@@ -103,10 +103,13 @@ public class PGNRread {
 	}
 
 	public static void extractMoves(String movesString, PieceList P) throws IOException{
-		Pattern pattern = Pattern.compile("[0-9]+\\..+?(?=(\\s[0-9]+\\.))"); // regex to extract each move e.g "1. d4 d6"  \\s[0-9]+
+		Pattern pattern = Pattern.compile("[0-9]+\\..+?(?=((\\s[0-9]+\\.)|(\\{)))"); // regex to extract each move e.g "1. d4 d6"  \\s[0-9]+
 		// TODO add regex for last move   [0-9]+\\..+?(?=\\s[0-9]+\\.
 		Matcher matcher = pattern.matcher(movesString);
 		String[] hit = new String[3];
+		String whiteMove = null;
+		String blackMove = null;
+
 		for(Piece piece : P.allPieces){
 			String[] moveEntry = {"0", piece.getOrigin()};
 			piece.moveHistory.add(moveEntry);	
@@ -115,10 +118,16 @@ public class PGNRread {
 		while(matcher.find()){
 			//hit[0] includes the move number, hit[1] -> white move hit[2] -> black move
 			hit=matcher.group().split(" ");
-			//System.out.println(hit[0]+" "+hit[1]+" "+hit[2]);
+			
 			String moveNumber= hit[0].substring(0,(hit[0].length()-1));
-			String whiteMove = hit[1];
-			String blackMove = hit[2];
+			if(hit.length >= 2){
+				whiteMove = hit[1];
+			}
+			if(hit.length >= 3){
+				blackMove = hit[2];
+			} //TODO make sure that games that 
+			//System.out.println(hit[0]+" "+hit[1]+" "+hit[2]);
+			
 			String whiteMoveLoc="";
 			String blackMoveLoc="";
 			Piece lastMovedWhitePiece = null;
