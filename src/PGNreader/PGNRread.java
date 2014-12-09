@@ -28,7 +28,7 @@ public class PGNRread {
 		try{
 			String currentLine;
 			br=new BufferedReader(new FileReader( //PGN to read
-					"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
+					"/Users/ethangottlieb/Documents/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
 			//iterate through every line
 			while((currentLine = br.readLine()) != null){
 
@@ -62,10 +62,10 @@ public class PGNRread {
 			}
 		}
 		
-		printToJSON(P);
+		printPiecesToJSON(P);
 	}
 	
-	public static void printToJSON(PieceList P){
+	public static void printPiecesToJSON(PieceList P){
 		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Pieces into a JSON file
 		PrintWriter out = null;
 		try {
@@ -100,6 +100,51 @@ public class PGNRread {
 			System.out.println();**/
 		} 
 		out.close();	
+		printVisualizationDataToJSON(P);
+	}
+	
+	public static void printVisualizationDataToJSON(PieceList P){
+
+		// Create Visualization Objects
+		Visualization one = new VisualizationFive(P, "Piece Flow (Static)", "1", "Board Flow");
+		Visualization two = new VisualizationFive(P, "Piece Movement Map (Time)", "2", "Board Heat");
+		Visualization five = new VisualizationFive(P, "Avg Moves/Captures Per Piece (Static)", "5", "Bar Graph");
+		
+		Visualization[] allVisualizations = {one, two, five};
+		
+		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Visualization into a JSON file
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(new BufferedWriter(new FileWriter("JSONvisualizations.txt", false)));
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		}
+
+		for (Visualization viz :  allVisualizations){ //iterate through all pieces
+			//Enumeration<String[]> e = piece.moveHistory.elements();
+
+			try
+			{
+				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(viz)); //print all instance variables of the piece   	  
+			} catch (JsonGenerationException a)
+			{
+				a.printStackTrace();
+			} catch (JsonMappingException a)
+			{
+				a.printStackTrace();
+			} catch (IOException a)
+			{
+				a.printStackTrace();
+			}
+
+			/**while(e.hasMoreElements()){
+				System.out.print(Arrays.toString(e.nextElement()) + " ");
+			}
+			System.out.println();**/
+		} 
+		out.close();
+		
 	}
 
 	public static void extractMoves(String movesString, PieceList P) throws IOException{
