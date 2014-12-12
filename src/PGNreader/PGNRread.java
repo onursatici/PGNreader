@@ -106,8 +106,8 @@ public class PGNRread {
 	public static void printVisualizationDataToJSON(PieceList P){
 
 		// Create Visualization Objects
-		Visualization one = new VisualizationFive(P, "Piece Flow (Static)", "1", "Board Flow");
-		Visualization two = new VisualizationFive(P, "Piece Movement Map (Time)", "2", "Board Heat");
+		Visualization one = new VisualizationOne(P, "Piece Flow (Static)", "1", "Board Flow");
+		Visualization two = new VisualizationTwo(P, "Piece Movement Map (Time)", "2", "Board Heat");
 		Visualization five = new VisualizationFive(P, "Avg Moves/Captures Per Piece (Static)", "5", "Bar Graph");
 		
 		Visualization[] allVisualizations = {one, two, five};
