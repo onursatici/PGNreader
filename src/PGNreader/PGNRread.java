@@ -108,9 +108,11 @@ public class PGNRread {
 		// Create Visualization Objects
 		Visualization one = new VisualizationOne(P, "Piece Flow (Static)", "1", "Board Flow");
 		Visualization two = new VisualizationTwo(P, "Piece Movement Map (Time)", "2", "Board Heat");
+		Visualization three = new VisualizationThree(P, "Piece Movement Probability (Time)", "3", "Bar Graph");
+		Visualization four = new VisualizationFour(P, "Piece Movement Probability (Static)", "4", "Line Graph");
 		Visualization five = new VisualizationFive(P, "Avg Moves/Captures Per Piece (Static)", "5", "Bar Graph");
 		
-		Visualization[] allVisualizations = {one, two, five};
+		Visualization[] allVisualizations = {one, two, three, four, five};
 		
 		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Visualization into a JSON file
 		PrintWriter out = null;

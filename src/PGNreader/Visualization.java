@@ -1,5 +1,11 @@
 package PGNreader;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class Visualization {
@@ -47,28 +53,40 @@ public class Visualization {
 	
 	public Visualization(PieceList P){
 		
-		/*
-		for (Piece piece: P.allPieces){
-			String[] dataEntry={""+piece.moveHistory.size(),""+piece.captureHistory.size()};
-			try {
-				Visualization v = new Visualization(P);
-				Object val = Visualization.getInstanceField(v, piece.getOrigin());
-				((Vector<String[]>) val).add(dataEntry);
-			} catch (Throwable e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		*/
 	}
 	
-	/*
-	 public static Object getInstanceField(Object instance, String fieldName) throws Throwable {
-	        Field field = instance.getClass().getDeclaredField(fieldName);
-	        field.setAccessible(true);
-	        return field.get(instance);
-	    }
-	    */
+	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+		fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+		if (type.getSuperclass() != null) {
+			fields = getAllFields(fields, type.getSuperclass());
+		}
+		return fields;
+	}
+	
+	public HashMap<String,Vector<String[]>> constructMap(){
+		
+		List<Field> fields =getAllFields(new LinkedList<Field>(), this.getClass());
+
+		HashMap<String,Vector<String[]>> pieceMap = new HashMap<String,Vector<String[]>>();
+		
+		for (Field f : fields) {
+			if (f.getType() == java.util.Vector.class) {
+				try {
+					pieceMap.put(f.getName(), ((Vector<String[]>) f.get(this)));
+
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+		}
+		return pieceMap;
+	}
+
 	
 	public static void main(String[] argv){
 
