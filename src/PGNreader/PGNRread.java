@@ -28,7 +28,7 @@ public class PGNRread {
 		try{
 			String currentLine;
 			br=new BufferedReader(new FileReader( //PGN to read
-					"/Users/ethangottlieb/Documents/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
+					"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
 			//iterate through every line
 			while((currentLine = br.readLine()) != null){
 
@@ -319,6 +319,7 @@ public class PGNRread {
 				moveLoc=move.substring(2,4);
 				capture = true;
 			}
+			
 			if(isWhite){
 				if (capture){
 					addCapture(moveLoc, moveNumber, P, P.wQ);
@@ -348,6 +349,9 @@ public class PGNRread {
 			if(move.charAt(1)=='x'){
 				moveLoc=move.substring(2,4);
 				capture=true;
+			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
+					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
+				moveLoc=move.substring(2,4);
 			}
 			if(move.charAt(2)=='x'){
 				moveLoc=move.substring(3,5);
@@ -463,6 +467,9 @@ public class PGNRread {
 			if(move.charAt(1)=='x'){
 				moveLoc=move.substring(2,4);
 				capture = true;
+			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
+					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
+				moveLoc=move.substring(2,4);
 			}
 			if(move.charAt(2)=='x'){
 				moveLoc=move.substring(3,5);
