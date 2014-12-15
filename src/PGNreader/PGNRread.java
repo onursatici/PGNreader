@@ -124,11 +124,10 @@ public class PGNRread {
 		}
 
 		for (Visualization viz :  allVisualizations){ //iterate through all pieces
-			//Enumeration<String[]> e = piece.moveHistory.elements();
 
 			try
 			{
-				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(viz)); //print all instance variables of the piece   	  
+				out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(viz)); //print all instance variables of the visualization 	  
 			} catch (JsonGenerationException a)
 			{
 				a.printStackTrace();
@@ -140,10 +139,7 @@ public class PGNRread {
 				a.printStackTrace();
 			}
 
-			/**while(e.hasMoreElements()){
-				System.out.print(Arrays.toString(e.nextElement()) + " ");
-			}
-			System.out.println();**/
+			
 		} 
 		out.close();
 		
@@ -346,7 +342,7 @@ public class PGNRread {
 
 	
 	private static Knight checkKnightMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P) {
-		boolean capture = false;
+		boolean capture = false; //TODO for knights and rooks, ad cases like Rab8
 		if(move.charAt(0)=='N'){
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){

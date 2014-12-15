@@ -141,7 +141,7 @@ d3.selectAll("input").on("change", change);
 
 var timeout = setTimeout(function() {
   d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
-}, 2000);
+}, 1000);
 
 function change() {
   clearTimeout(timeout);

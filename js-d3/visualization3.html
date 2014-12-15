@@ -68,7 +68,7 @@ var bar = chart.selectAll("g")
     .enter()
   .append("g")
     .attr("transform", function(d, i) { return "translate("+x(d.value[0][1])+ "," + i * barHeight + ")"; })
-    .attr("fill","\"yellow\"" );
+
 
 bar.append("rect")
     .attr("width", function(d) { return x(d.value[0][0]-d.value[0][1]); })

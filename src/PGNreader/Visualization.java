@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 public class Visualization {
@@ -64,6 +63,7 @@ public class Visualization {
 		return fields;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HashMap<String,Vector<String[]>> constructMap(){
 		
 		List<Field> fields =getAllFields(new LinkedList<Field>(), this.getClass());
@@ -89,7 +89,10 @@ public class Visualization {
 
 	
 	public static void main(String[] argv){
-
+		PieceList p = new PieceList();
+		Visualization a = new Visualization(p);
+		a.constructMap();
+		
 	}
 
 }

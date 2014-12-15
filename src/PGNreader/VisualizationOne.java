@@ -45,5 +45,7 @@ public class VisualizationOne extends Visualization {
 			map.clear();
 		}
 	}
-
+	public static void main(String[] agrv){
+		
+	}
 }

@@ -1,7 +1,7 @@
 package PGNreader;
 
 import java.util.HashMap;
-import java.util.Map;
+
 import java.util.Vector;
 
 public class VisualizationThree extends Visualization {
