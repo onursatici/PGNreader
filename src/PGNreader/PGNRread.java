@@ -318,24 +318,30 @@ public class PGNRread {
 			if(move.charAt(1)=='x'){
 				moveLoc=move.substring(2,4);
 				capture = true;
+			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
+					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
+				moveLoc=move.substring(2,4);
 			}
-			
 			if(isWhite){
-				if (capture){
-					addCapture(moveLoc, moveNumber, P, P.wQ);
+				if(P.wQ.canMove(moveLoc)){
+					if (capture){
+						addCapture(moveLoc, moveNumber, P, P.wQ);
+					}
+					P.wQ.setLocation(moveLoc);
+					String[] moveEntry = {moveNumber, moveLoc};
+					P.wQ.moveHistory.add(moveEntry);
+					return P.wQ;
 				}
-				P.wQ.setLocation(moveLoc);
-				String[] moveEntry = {moveNumber, moveLoc};
-				P.wQ.moveHistory.add(moveEntry);
-				return P.wQ;
 			}else{
-				if (capture){
-					addCapture(moveLoc, moveNumber, P, P.bQ);
+				if(P.bQ.canMove(moveLoc)){
+					if (capture){
+						addCapture(moveLoc, moveNumber, P, P.bQ);
+					}
+					P.bQ.setLocation(moveLoc);
+					String [] moveEntry = {moveNumber, moveLoc};
+					P.bQ.moveHistory.add(moveEntry);
+					return P.bQ;
 				}
-				P.bQ.setLocation(moveLoc);
-				String [] moveEntry = {moveNumber, moveLoc};
-				P.bQ.moveHistory.add(moveEntry);
-				return P.bQ;
 			}	
 		}
 		return null;
