@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Spare Pieces Example</title>
+  <base href="/Users/onursatici/Documents/workspace/PGNreader/js-d3/"> </base>
+  <link rel="stylesheet" href="js/chessboardjs-0.3.0/css/chessboard-0.3.0.css" />
+</head>
+<body>
+
+  <div id="board" style="width: 400px" position="fixed"></div>
+
+  <form action="visualization1.html">
+    <input type="submit" id="Visualization1" value="Visualization1"/>
+  </form>
+  <form action="visualization2.html">
+    <input type="submit" id="Visualization2" value="Visualization1"/>
+  </form>
+  <form action="visualization3.html">
+    <input type="submit" id="Visualization3" value="Visualization1"/>
+  </form>
+  <form action="visualization4.html">
+    <input type="submit" id="Visualization4" value="Visualization1"/>
+  </form>
+  <form action="visualization5.html">
+    <input type="submit" id="Visualization5" value="Visualization1"/>
+  </form>
+  <form action="main.html">
+    <input type="submit" id="main" value="main"/>
+  </form>
+
+  <script type="text/javascript" src="js/jQuery/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="js/chessboardjs-0.3.0/js/chessboard-0.3.0.js"></script>
+
+
+  <script> //jQuery
+  var init = function() {
+    var board = new ChessBoard('board','start');
+    $('#clearBtn').on('click', board.clear);
+  };
+  $(document).ready(init);
+  </script>
+</html>

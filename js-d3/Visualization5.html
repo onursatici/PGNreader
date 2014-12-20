@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  width: 960px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#svgHere{
+
+  width: 392px; height:392px; position: relative; left: 8px;
+}
+#container{
+  background: #400;
+}
+#buttons{
+     left: 8px;
+}
+</style>
+<body>
+
+    <div id='svgHere'></div>
+    <div id='buttons' >
+      <form action="visualization1.html">
+        <input type="submit" id="Visualization1" value="Visualization1"/>
+      </form>
+      <form action="visualization2.html">
+        <input type="submit" id="Visualization2" value="Visualization2"/>
+      </form>
+      <form action="visualization3.html">
+        <input type="submit" id="Visualization3" value="Visualization3"/>
+      </form>
+      <form action="visualization4.html">
+        <input type="submit" id="Visualization4" value="Visualization4"/>
+      </form>
+      <form action="visualization5.html">
+        <input type="submit" id="Visualization5" value="Visualization5"/>
+      </form>
+    </div>
+
+</body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+var data= {
+  "a2" : [ [ "726", "53" ] ],
+  "b2" : [ [ "714", "78" ] ],
+  "c2" : [ [ "866", "121" ] ],
+  "d2" : [ [ "1024", "124" ] ],
+  "e2" : [ [ "1113", "169" ] ],
+  "f2" : [ [ "754", "81" ] ],
+  "g2" : [ [ "716", "59" ] ],
+  "h2" : [ [ "760", "44" ] ],
+  "a7" : [ [ "720", "29" ] ],
+  "b7" : [ [ "777", "79" ] ],
+  "c7" : [ [ "898", "146" ] ],
+  "d7" : [ [ "1038", "142" ] ],
+  "e7" : [ [ "1035", "145" ] ],
+  "f7" : [ [ "732", "74" ] ],
+  "g7" : [ [ "730", "60" ] ],
+  "h7" : [ [ "766", "62" ] ],
+  "a1" : [ [ "1246", "211" ] ],
+  "b1" : [ [ "1553", "237" ] ],
+  "c1" : [ [ "1408", "276" ] ],
+  "d1" : [ [ "1817", "416" ] ],
+  "e1" : [ [ "2152", "151" ] ],
+  "f1" : [ [ "1397", "270" ] ],
+  "g1" : [ [ "1578", "282" ] ],
+  "h1" : [ [ "1560", "203" ] ],
+  "a8" : [ [ "1212", "198" ] ],
+  "b8" : [ [ "1515", "241" ] ],
+  "c8" : [ [ "1291", "232" ] ],
+  "d8" : [ [ "1947", "520" ] ],
+  "e8" : [ [ "2189", "139" ] ],
+  "f8" : [ [ "1417", "256" ] ],
+  "g8" : [ [ "1449", "235" ] ],
+  "h8" : [ [ "1530", "226" ] ]
+}
+
+var temp2 = d3.entries(data).map(function(d,i) { return {"x": i ,"y": d.value[0][0], "y0" : 0} })
+var temp3 = d3.entries(data).map(function(d,i) { return {"x": i ,"y": d.value[0][1] , "y0" : 0} })
+var temp4 = [temp2,temp3];
+//console.log(temp[2].value[0][0]);
+
+var n = 2, // number of layers
+m = 32, // number of samples per layer
+
+layers =temp4,
+yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+
+
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+width = 392 - margin.left - margin.right,
+height = 392 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+.domain(d3.range(m))
+.rangeRoundBands([0, width], .08);
+
+var y = d3.scale.linear()
+.domain([0, 2200])
+.range([height, 0]);
+
+var color = d3.scale.linear()
+.domain([0, n - 1])
+.range(["#b58863", "#f0d9b5"]);
+
+var xAxis = d3.svg.axis()
+.scale(x)
+.tickSize(0)
+.tickPadding(6)
+.orient("top");
+
+var svg = d3.select("body").select("#svgHere").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var layer = svg.selectAll(".layer")
+.data(layers)
+.enter().append("g")
+.attr("class", "layer")
+.style("fill", function(d, i) { return color(i); });
+
+var rect = layer.selectAll("rect")
+.data(function(d) { return d; })
+.enter().append("rect")
+.attr("x", function(d) { return x(d.x); })
+.attr("y", height)
+.attr("width", x.rangeBand())
+.attr("height", 0);
+
+rect.transition()
+.delay(function(d, i) { return i * 10; })
+.attr("y", function(d) { return y(d.y0 + d.y); })
+.attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+
+svg.append("g")
+.attr("class", "x axis")
+.attr("transform", "translate(0," + height + ")")
+.call(xAxis);
+</script>

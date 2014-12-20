@@ -223,44 +223,30 @@ public class PGNRread {
 	}
 	
 	private static void checkChecks(String move,String moveNumber, boolean isWhite, Piece lastMovedPiece){
+		if(move != null)
 		if(move.charAt(move.length()-1)== '+' && lastMovedPiece != null){
 			lastMovedPiece.checkHistory.add(moveNumber);
 		}
 	}
 	
 	private static void checkCastling(String move,String moveNumber ,boolean isWhite, PieceList P){
+		if(move != null)
 		if(move.charAt(0)=='O'){ // check if castling and update the move histories of different pieces.
 			if(move.length()>4){
 				if(isWhite){
-					P.wK.setLocation("c1");
-					P.wRQ.setLocation("d1");
-					String[] moveEntry={moveNumber,"c1"};
-					P.wK.moveHistory.add(moveEntry);
-					String[] moveEntryTwo= {moveNumber, "d1"};
-					P.wRQ.moveHistory.add(moveEntryTwo);
+					addMove(P,P.wK,"c1",moveNumber);
+					addMove(P,P.wRQ,"d1",moveNumber);
 				}else{
-					P.bK.setLocation("c8");
-					P.bRQ.setLocation("d8");
-					String[] moveEntry={moveNumber,"c8"};
-					P.bK.moveHistory.add(moveEntry);
-					String[] moveEntryTwo= {moveNumber, "d8"};
-					P.bRQ.moveHistory.add(moveEntryTwo);
+					addMove(P,P.bK,"c8",moveNumber);
+					addMove(P,P.bRQ,"d8",moveNumber);
 				}
 			}else{
 				if(isWhite){
-					P.wK.setLocation("g1");
-					P.wRK.setLocation("f1");
-					String[] moveEntry={moveNumber,"g1"};
-					P.wK.moveHistory.add(moveEntry);
-					String[] moveEntryTwo= {moveNumber, "f1"};
-					P.wRK.moveHistory.add(moveEntryTwo);
+					addMove(P,P.wK,"g1",moveNumber);
+					addMove(P,P.wRK,"f1",moveNumber);
 				}else{
-					P.bK.setLocation("b8");
-					P.bRK.setLocation("c8");
-					String[] moveEntry={moveNumber,"b8"};
-					P.bK.moveHistory.add(moveEntry);
-					String[] moveEntryTwo= {moveNumber, "c8"};
-					P.bRK.moveHistory.add(moveEntryTwo);
+					addMove(P,P.bK,"g8",moveNumber);
+					addMove(P,P.bRK,"f8",moveNumber);
 				}
 			}
 		}
@@ -268,6 +254,7 @@ public class PGNRread {
 	
 	private static King checkKingMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
 		boolean capture =false;
+		if(move != null)
 		if(move.charAt(0)=='K'){
 			moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -275,20 +262,12 @@ public class PGNRread {
 				moveLoc=move.substring(2,4);
 			}
 			if(isWhite){
-				if (capture){
-					addCapture(moveLoc, moveNumber, P, P.wK);
-				}	
-				P.wK.setLocation(moveLoc);
-				String[] moveEntry = {moveNumber,moveLoc};
-				P.wK.moveHistory.add(moveEntry);					
+				if (capture) addCapture(moveLoc, moveNumber, P, P.wK);
+				addMove(P,P.wK,moveLoc,moveNumber);
 				return P.wK;
 			}else{
-				if (capture){
-					addCapture(moveLoc, moveNumber, P, P.bK);
-				}	
-				P.bK.setLocation(moveLoc);
-				String[] moveEntry = {moveNumber, moveLoc};
-				P.bK.moveHistory.add(moveEntry);
+				if (capture) addCapture(moveLoc, moveNumber, P, P.bK);
+				addMove(P,P.bK,moveLoc,moveNumber);
 				return P.bK;
 			}
 		}
@@ -301,7 +280,7 @@ public class PGNRread {
 		for (Piece piece :  P.allPieces){
 			if (piece.getLocation().equals(moveLoc)){
 				capturedPiece = piece.getOrigin();
-				piece.setLocation("captured at " + moveLoc + " by " +  movedPiece.getOrigin()+ movedPiece.getPiece() + " on move "+ moveNumber);
+				piece.setLocation("----captured at " + moveLoc + " by " +  movedPiece.getOrigin()+ movedPiece.getPiece() + " on move "+ moveNumber);
 				String[] killedString = {movedPiece.getOrigin() + movedPiece.getPiece(),moveNumber};
 				
 				piece.killedBy.add(killedString);
@@ -313,33 +292,32 @@ public class PGNRread {
 	
 	private static Queen checkQueenMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
 		boolean capture = false;
+		if(move != null)
 		if(move.charAt(0)=='Q'){
+			char indicator = 'o';
 			moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
 				moveLoc=move.substring(2,4);
 				capture = true;
-			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
-					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
+			}else if( Math.abs(move.charAt(1)-move.charAt(2))<9){ //Rab8
 				moveLoc=move.substring(2,4);
+				indicator = move.charAt(1); 
+			}
+			if(move.charAt(2)=='x'){
+				moveLoc=move.substring(3,5);
+			capture = true;
+			indicator = move.charAt(1);
 			}
 			if(isWhite){
-				if(P.wQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wQ);
-					}
-					P.wQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber, moveLoc};
-					P.wQ.moveHistory.add(moveEntry);
+				if(P.wQ.canMove(moveLoc) && (indicator == 'o' || indicator==P.wQ.getLocation().charAt(0))){ //System.out.println("wQ can move: "+P.wQ.getLocation()+" to "+moveLoc);
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wQ);
+					addMove(P,P.wQ,moveLoc,moveNumber);
 					return P.wQ;
 				}
 			}else{
-				if(P.bQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bQ);
-					}
-					P.bQ.setLocation(moveLoc);
-					String [] moveEntry = {moveNumber, moveLoc};
-					P.bQ.moveHistory.add(moveEntry);
+				if(P.bQ.canMove(moveLoc) && (indicator == 'o' || indicator==P.bQ.getLocation().charAt(0))){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bQ);
+					addMove(P,P.bQ,moveLoc,moveNumber);
 					return P.bQ;
 				}
 			}	
@@ -350,59 +328,52 @@ public class PGNRread {
 	
 	private static Knight checkKnightMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P) {
 		boolean capture = false; //TODO for knights and rooks, ad cases like Rab8
+		if(move != null)
 		if(move.charAt(0)=='N'){
+				char indicator = 'o';
 				moveLoc=move.substring(1,3);
-			if(move.charAt(1)=='x'){
-				moveLoc=move.substring(2,4);
-				capture=true;
-			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
-					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
-				moveLoc=move.substring(2,4);
-			}
-			if(move.charAt(2)=='x'){
-				moveLoc=move.substring(3,5);
+				if(move.charAt(1)=='x'){
+					moveLoc=move.substring(2,4);
+					capture = true;
+				}else if( Math.abs(move.charAt(1)-move.charAt(2))<9){ //Rab8
+					moveLoc=move.substring(2,4);
+					indicator = move.charAt(1); 
+				}
+				if(move.charAt(2)=='x'){
+					moveLoc=move.substring(3,5);
 				capture = true;
-			}
+				indicator = move.charAt(1);
+				}
 			if(isWhite){
-				if(P.wNQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wNQ);
-					}	
-					P.wNQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wNQ.moveHistory.add(moveEntry);
-					
+				boolean Q=true; boolean K=true;
+				if(indicator != 'o'){
+					if(P.wRQ.getLocation().charAt(0)==indicator) K=false;
+					if(P.wRK.getLocation().charAt(0)==indicator) Q=false;
+				}
+				if(P.wNQ.canMove(moveLoc) && Q){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wNQ);
+					addMove(P,P.wNQ,moveLoc,moveNumber);
 					return P.wNQ;
 				}
-				if(P.wNK.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wNK);
-					}	
-					P.wNK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wNK.moveHistory.add(moveEntry);
-					
+				if(P.wNK.canMove(moveLoc) && K){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wNK);
+					addMove(P,P.wNK,moveLoc,moveNumber);
 					return P.wNK;
 				}
 			}else{
-				if(P.bNQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bNQ);
-					}
-					P.bNQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bNQ.moveHistory.add(moveEntry);
-						
+				boolean Q=true; boolean K=true;
+				if(indicator != 'o'){
+					if(P.wRQ.getLocation().charAt(0)==indicator) K=false;
+					if(P.wRK.getLocation().charAt(0)==indicator) Q=false;
+				}
+				if(P.bNQ.canMove(moveLoc) && Q){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bNQ);
+					addMove(P,P.bNQ,moveLoc,moveNumber);
 					return P.bNQ;
 				}
-				if(P.bNK.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bNK);
-					}	
-					P.bNK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bNK.moveHistory.add(moveEntry);
-					
+				if(P.bNK.canMove(moveLoc) && K){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bNK);
+					addMove(P,P.bNK,moveLoc,moveNumber);
 					return P.bNK;
 				}
 			}
@@ -413,6 +384,7 @@ public class PGNRread {
 
 	private static Bishop checkBishopMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
 		boolean capture = false;
+		if(move != null)
 		if(move.charAt(0)=='B'){
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
@@ -425,40 +397,24 @@ public class PGNRread {
 			}
 			if(isWhite){
 				if(P.wBQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wBQ);
-					}
-					P.wBQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wBQ.moveHistory.add(moveEntry);
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wBQ);	
+					addMove(P,P.wBQ,moveLoc,moveNumber);
 					return P.wBQ;
 				}
 				if(P.wBK.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wBK);
-					}
-					P.wBK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wBK.moveHistory.add(moveEntry);
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wBK);
+					addMove(P,P.wBK,moveLoc,moveNumber);
 					return P.wBK;
 				}
 			}else{
 				if(P.bBQ.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bBQ);
-					}
-					P.bBQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bBQ.moveHistory.add(moveEntry);
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bBQ);
+					addMove(P,P.bBQ,moveLoc,moveNumber);
 					return P.bBQ;
 				}
 				if(P.bBK.canMove(moveLoc)){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bBK);
-					}
-					P.bBK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bBK.moveHistory.add(moveEntry);
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bBK);
+					addMove(P,P.bBK,moveLoc,moveNumber);
 					return P.bBK;
 				}
 			}
@@ -468,60 +424,63 @@ public class PGNRread {
 
 	private static Rook checkRookMove(String move, String moveLoc, String moveNumber, boolean isWhite, PieceList P){
 		boolean capture = false;
-		if(move.charAt(0)=='R'){
+		if(move != null)
+		if(move.charAt(0)=='R'){ //System.out.println(move);
+			char indicator = 'o';
 				moveLoc=move.substring(1,3);
 			if(move.charAt(1)=='x'){
 				moveLoc=move.substring(2,4);
 				capture = true;
-			}else if(move.length()>3 || move.charAt(2)=='a' || move.charAt(2)=='b' || move.charAt(2)=='c' || move.charAt(2)=='d' ||
-					move.charAt(2)=='e' || move.charAt(2)=='f' || move.charAt(2)=='g' || move.charAt(2)=='h'){ //Rab8
+			}else if( Math.abs(move.charAt(1)-move.charAt(2))<9){ //Rab8
 				moveLoc=move.substring(2,4);
+				indicator = move.charAt(1); 
 			}
 			if(move.charAt(2)=='x'){
 				moveLoc=move.substring(3,5);
 				capture = true;
+				indicator = move.charAt(1);
 			}
+			//System.out.println(indicator + " " +moveLoc);
 			if(isWhite){
-				if(P.wRQ.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.wRQ.getLocation())){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wRQ);
-					}
-					P.wRQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wRQ.moveHistory.add(moveEntry);
+				boolean Q=true; boolean K=true;
+				if(indicator != 'o'){
+					if(P.wRQ.getLocation().charAt(0)==indicator) K=false;
+					if(P.wRK.getLocation().charAt(0)==indicator) Q=false;
+				}
+				if(P.wRQ.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.wRQ.getLocation()) && Q){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wRQ); 
+					addMove(P,P.wRQ,moveLoc,moveNumber); 
 					return P.wRQ;
 				}
-				if(P.wRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.wRK.getLocation())){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.wRK);
-					}
-					P.wRK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.wRK.moveHistory.add(moveEntry);
+				if(P.wRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.wRK.getLocation()) && K){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.wRK);
+					addMove(P,P.wRK,moveLoc,moveNumber); 
 					return P.wRK;
 				}
 			}else{
-				if(P.bRQ.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRQ.getLocation())){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bRQ);
-					}
-					P.bRQ.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bRQ.moveHistory.add(moveEntry);
+				boolean Q=true; boolean K=true;
+				if(indicator != 'o'){
+					if(P.bRQ.getLocation().charAt(0)==indicator) K=false;
+					if(P.bRK.getLocation().charAt(0)==indicator) Q=false;
+				}
+				if(P.bRQ.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRQ.getLocation()) && Q){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bRQ);
+					addMove(P,P.bRQ,moveLoc,moveNumber);
 					return P.bRQ;
 				}
-				if(P.bRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRK.getLocation())){
-					if (capture){
-						addCapture(moveLoc, moveNumber, P, P.bRK);
-					}
-					P.bRK.setLocation(moveLoc);
-					String[] moveEntry = {moveNumber,moveLoc};
-					P.bRK.moveHistory.add(moveEntry);
+				if(P.bRK.canMove(moveLoc) && isEmptyBetween(P,moveLoc,P.bRK.getLocation()) && K){
+					if (capture) addCapture(moveLoc, moveNumber, P, P.bRK);
+					addMove(P,P.bRK,moveLoc,moveNumber);
 					return P.bRK;
 				}
 			}
 		}
 		return null;
+	}
+	private static void addMove(PieceList P,Piece piece, String moveLoc, String moveNumber){
+		piece.setLocation(moveLoc);
+		String[] moveEntry = {moveNumber, moveLoc};
+		piece.moveHistory.add(moveEntry);
 	}
 
 	private static char max(char a, char b){
@@ -590,6 +549,7 @@ public class PGNRread {
 */
 
 	private static Pawn checkPawnMove(String move, String moveLoc,String moveNumber, boolean isWhite, PieceList P){
+		if(move != null)
 		if(move.charAt(0)=='a' || move.charAt(0)=='b' || move.charAt(0)=='c' || move.charAt(0)=='d' ||
 				move.charAt(0)=='e' || move.charAt(0)=='f' || move.charAt(0)=='g' || move.charAt(0)=='h'){
 			char row = move.charAt(0);
