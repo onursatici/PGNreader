@@ -35,9 +35,9 @@ text {
 }
 </style>
 <body>
-    <div id='svgHere'></div> <label><input type="checkbox"> </label>
-    <input type="range" name="points" id="slider" value="50" min="1" max="100" data-popup-enabled="true" onchange="rangevalue.value=value">
-    <output id="rangevalue">50</output>
+    <div id='svgHere'></div> <label><input id='order'type="checkbox"> </label>
+    <input type="range" name="points" id="slider" value="1" min="1" max="100" data-popup-enabled="true" onchange="rangevalue.value=value">
+    <output id="rangevalue">1</output>
     <div id='buttons' >
       <form action="visualization1.html">
         <input type="submit" id="Visualization1" value="Visualization1"/>
@@ -95,7 +95,7 @@ var data= {
   "h8" : [ [ "move #1", "0.0" ], [ "move #2", "0.0" ], [ "move #3", "0.0024449877750611247" ], [ "move #4", "0.012224938875305624" ], [ "move #5", "0.05623471882640587" ], [ "move #6", "0.08801955990220049" ], [ "move #7", "0.06845965770171149" ], [ "move #8", "0.06356968215158924" ], [ "move #9", "0.07090464547677261" ], [ "move #10", "0.05134474327628362" ], [ "move #11", "0.07090464547677261" ], [ "move #12", "0.061124694376528114" ], [ "move #13", "0.06845965770171149" ], [ "move #14", "0.07334963325183375" ], [ "move #15", "0.06845965770171149" ], [ "move #16", "0.07090464547677261" ], [ "move #17", "0.04645476772616137" ], [ "move #18", "0.07334963325183375" ], [ "move #19", "0.09290953545232274" ], [ "move #20", "0.06356968215158924" ], [ "move #21", "0.08801955990220049" ], [ "move #22", "0.09290953545232274" ], [ "move #23", "0.07334963325183375" ], [ "move #24", "0.09046454767726161" ], [ "move #25", "0.06356968215158924" ], [ "move #26", "0.08557457212713937" ], [ "move #27", "0.07579462102689487" ], [ "move #28", "0.06601466992665037" ], [ "move #29", "0.044009779951100246" ], [ "move #30", "0.044009779951100246" ], [ "move #31", "0.029339853300733496" ], [ "move #32", "0.04645476772616137" ], [ "move #33", "0.0488997555012225" ], [ "move #34", "0.04156479217603912" ], [ "move #35", "0.02689486552567237" ], [ "move #36", "0.03667481662591687" ], [ "move #37", "0.04156479217603912" ], [ "move #38", "0.044009779951100246" ], [ "move #39", "0.034229828850855744" ], [ "move #40", "0.03667481662591687" ], [ "move #41", "0.039119804400977995" ], [ "move #42", "0.03178484107579462" ], [ "move #43", "0.03178484107579462" ], [ "move #44", "0.03667481662591687" ], [ "move #45", "0.044009779951100246" ], [ "move #46", "0.044009779951100246" ], [ "move #47", "0.017114914425427872" ], [ "move #48", "0.029339853300733496" ], [ "move #49", "0.019559902200488997" ], [ "move #50", "0.02444987775061125" ], [ "move #51", "0.017114914425427872" ], [ "move #52", "0.009779951100244499" ], [ "move #53", "0.007334963325183374" ], [ "move #54", "0.0024449877750611247" ], [ "move #55", "0.014669926650366748" ], [ "move #56", "0.009779951100244499" ], [ "move #57", "0.0024449877750611247" ], [ "move #58", "0.007334963325183374" ], [ "move #59", "0.012224938875305624" ], [ "move #60", "0.007334963325183374" ], [ "move #61", "0.004889975550122249" ], [ "move #62", "0.012224938875305624" ], [ "move #63", "0.009779951100244499" ], [ "move #64", "0.004889975550122249" ], [ "move #65", "0.009779951100244499" ], [ "move #66", "0.004889975550122249" ], [ "move #67", "0.007334963325183374" ], [ "move #68", "0.004889975550122249" ], [ "move #69", "0.007334963325183374" ], [ "move #70", "0.004889975550122249" ], [ "move #71", "0.004889975550122249" ], [ "move #72", "0.0024449877750611247" ], [ "move #73", "0.0024449877750611247" ], [ "move #74", "0.0024449877750611247" ], [ "move #75", "0.004889975550122249" ], [ "move #76", "0.004889975550122249" ], [ "move #77", "0.0024449877750611247" ], [ "move #78", "0.004889975550122249" ], [ "move #79", "0.004889975550122249" ], [ "move #80", "0.0024449877750611247" ], [ "move #81", "0.0024449877750611247" ], [ "move #82", "0.0" ], [ "move #83", "0.0" ], [ "move #84", "0.0024449877750611247" ], [ "move #85", "0.0024449877750611247" ], [ "move #86", "0.0024449877750611247" ], [ "move #87", "0.0024449877750611247" ], [ "move #88", "0.0" ], [ "move #89", "0.0" ], [ "move #90", "0.0" ], [ "move #91", "0.0" ], [ "move #92", "0.0" ], [ "move #93", "0.0" ], [ "move #94", "0.0" ], [ "move #95", "0.0" ], [ "move #96", "0.0" ], [ "move #97", "0.0" ], [ "move #98", "0.0" ], [ "move #99", "0.0" ] ]
 }
 
-var layers = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[0][1], "y0" : 0} })
+
 
 
 
@@ -134,20 +134,25 @@ var svg = d3.select("body").select("#svgHere").append("svg")
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform", "translate(32,10)");
+var layers = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[0][1], "y0" : 0} })
 
-var rect = svg.selectAll("rect")
-.data(layers)
-.enter().append("rect")
-.attr("x", function(d) { return x(d.x); })
-.attr("y", height)
-.attr("width", x.rangeBand())
-.attr("height", 0)
-.attr('fill','#b58863');
+d3.select('#slider').on("change", change)
+function change(){
+  var move = document.getElementById("slider").value;
+  layers = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[move-1][1], "y0" : 0} })
+  d3.selectAll("rect").remove();
+  var rect = svg.selectAll("rect")
+  .data(layers)
+  .enter().append("rect")
+  .attr("x", function(d) { return x(d.x); })
+  .attr("y", function(d){return y(d.y);})
+  .attr("width", x.rangeBand())
+  .attr("height", function(d) { return  height-20-y(d.y); })
+  .attr('fill','#b58863');
 
-rect.transition()
-.delay(function(d, i) { return i * 10; })
-.attr("y", function(d){return y(d.y);})
-.attr("height", function(d) { return  height-20-y(d.y); });
+
+}
+
 
 svg.append("g")
 .attr("class", "x axis")
@@ -159,32 +164,15 @@ svg.append("g")
 .attr("transform","translate(0,0)")
 .call(yAxis);
 
-var legend = svg.selectAll(".legend")
-.data(color.domain().slice().reverse())
-.enter().append("g")
-.attr("class", "legend")
-.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-legend.append("rect")
-.attr("x", 18)
-.attr("width", 18)
-.attr("height", 18)
-.style("fill", color);
 
-legend.append("text")
-.attr("x", 40)
-.attr("y", 9)
-.attr("dy", ".35em")
-.style("text-anchor", "start")
-.text(function(d) { if(d==0) {return "moves"} return "captures"; });
-
-d3.select("input").on("change", change);
+d3.select("#order").on("change", changeOrder);
 
 //var sortTimeout = setTimeout(function() {
 //  d3.select("input").property("checked", true).each(change);
 //}, 2000);
 
-function change() {
+function changeOrder() {
   //clearTimeout(sortTimeout);
 
   // Copy-on-write since tweens are evaluated after a delay.
