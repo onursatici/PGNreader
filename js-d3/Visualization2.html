@@ -20,10 +20,12 @@
   <input type="range" name="points" id="slider" value="50" min="1" max="100" data-popup-enabled="true" onchange="rangevalue.value=value">
   <output id="rangevalue">50</output>
   <div>
-  <input type="button" id="Visualization1" value="Visualization1" />
-  <form action="visualization2.html">
-    <input type="submit" id="Visualization2" value="Visualization2"/>
+  <form action="visualization1.html">
+  <input type="submit" id="Visualization1" value="Visualization1" />
   </form>
+
+    <input type="submit" id="Visualization2" value="Visualization2"/>
+
   <form action="visualization3.html">
     <input type="submit" id="Visualization3" value="Visualization3"/>
   </form>
@@ -44,7 +46,7 @@
   var board = new ChessBoard('board','start');
   $('#startBtn').on('click', board.start);
   $('#clearBtn').on('click', board.clear);
-  $('#Visualization1').on('click',function(){
+  $('#Visualization2').on('click',function(){
       $('#toHide').toggle();
     })
   };
@@ -110,6 +112,11 @@
     moveData=dataSelected[move-1];
     console.log(moveData);
     svgContainer.selectAll('rect').remove();
+    var max=moveData[1];
+    for(var i = 1; i<moveData.length-2 ; i=i+2){
+      if(moveData[i+2]>moveData[i]) max=moveData[i+2];
+    }
+    console.log(max);
     for(var i = 0; i< moveData.length ; i=i+2){
       var x = moveData[i].charCodeAt(0)-96, y = 9-moveData[i].charCodeAt(1)+48;
       console.log(moveData[i]+" "+x+""+y)
@@ -118,8 +125,8 @@
                                 .attr('y',49*y-49)
                                 .attr('height',49)
                                 .attr('width',49)
-                                .attr('fill','blue')
-                                .attr('fill-opacity', data[i+1]);
+                                .attr('fill','steelblue')
+                                .attr('fill-opacity',moveData[i+1]/max);
     }
 
 
