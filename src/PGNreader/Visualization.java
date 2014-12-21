@@ -10,9 +10,9 @@ import java.util.Vector;
 
 public class Visualization {
 	
-	public String name = "";
-	public String number ="";
-	public String type = "";
+	protected String name = "";
+	protected String number ="";
+	protected String type = "";
 	
 	public Vector<String[]> a2=new Vector<String[]>(10);
 	public Vector<String[]> b2=new Vector<String[]>(10);
