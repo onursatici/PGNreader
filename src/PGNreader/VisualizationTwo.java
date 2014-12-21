@@ -33,11 +33,10 @@ public class VisualizationTwo extends Visualization {
 					}
 				}
 				int count = 0;
-				String[] string = new String[map.entrySet().size()*3];
+				String[] string = new String[map.entrySet().size()*2];
 				for (Map.Entry<String, Integer> mapEntry : map.entrySet()) {
 
-					string[count] = "move #"+i;
-					count++;
+					
 					string[count] = mapEntry.getKey();
 					count++;
 					string[count] = ""+mapEntry.getValue();

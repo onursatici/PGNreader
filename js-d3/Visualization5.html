@@ -23,16 +23,13 @@ text {
 
   width: 392px; height:392px; position: relative; left: 8px;
 }
-#container{
-  background: #400;
-}
+
 #buttons{
-     left: 8px;
+  position: absolute; top: 420px; left: 8px;
 }
 </style>
 <body>
-
-    <div id='svgHere'></div>
+    <div id='svgHere'></div> <label><input type="checkbox"> </label>
     <div id='buttons' >
       <form action="visualization1.html">
         <input type="submit" id="Visualization1" value="Visualization1"/>
@@ -90,8 +87,8 @@ var data= {
   "h8" : [ [ "1530", "226" ] ]
 }
 
-var temp2 = d3.entries(data).map(function(d,i) { return {"x": i ,"y": d.value[0][0], "y0" : 0} })
-var temp3 = d3.entries(data).map(function(d,i) { return {"x": i ,"y": d.value[0][1] , "y0" : 0} })
+var temp2 = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[0][0], "y0" : 0} })
+var temp3 = d3.entries(data).map(function(d) { return {"x": d.key ,"y": d.value[0][1] , "y0" : 0} })
 var temp4 = [temp2,temp3];
 //console.log(temp[2].value[0][0]);
 
@@ -104,33 +101,38 @@ yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { 
 
 
 
-var margin = {top: 0, right: 0, bottom: 0, left: 0},
-width = 392 - margin.left - margin.right,
-height = 392 - margin.top - margin.bottom;
+var margin = {top: 10, right: 0, bottom: 0, left: 32},
+width = 700 - margin.left - margin.right,
+height = 410 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
-.domain(d3.range(m))
+.domain(d3.keys(data))
 .rangeRoundBands([0, width], .08);
 
 var y = d3.scale.linear()
 .domain([0, 2200])
-.range([height, 0]);
+.range([height-20, 0]);
 
 var color = d3.scale.linear()
 .domain([0, n - 1])
 .range(["#b58863", "#f0d9b5"]);
 
+var yAxis = d3.svg.axis()
+.scale(y)
+.tickSize(0)
+.tickPadding(6)
+.orient("left");
 var xAxis = d3.svg.axis()
 .scale(x)
 .tickSize(0)
 .tickPadding(6)
-.orient("top");
+.orient("bottom");
 
 var svg = d3.select("body").select("#svgHere").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+.attr("transform", "translate(32,10)");
 
 var layer = svg.selectAll(".layer")
 .data(layers)
@@ -153,6 +155,60 @@ rect.transition()
 
 svg.append("g")
 .attr("class", "x axis")
-.attr("transform", "translate(0," + height + ")")
+.attr("transform", "translate(0, 380)")
 .call(xAxis);
+
+svg.append("g")
+.attr("class", "y axis")
+.attr("transform","translate(0,0)")
+.call(yAxis);
+
+var legend = svg.selectAll(".legend")
+.data(color.domain().slice().reverse())
+.enter().append("g")
+.attr("class", "legend")
+.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+legend.append("rect")
+.attr("x", 18)
+.attr("width", 18)
+.attr("height", 18)
+.style("fill", color);
+
+legend.append("text")
+.attr("x", 40)
+.attr("y", 9)
+.attr("dy", ".35em")
+.style("text-anchor", "start")
+.text(function(d) { if(d==0) {return "moves"} return "captures"; });
+
+d3.select("input").on("change", change);
+
+//var sortTimeout = setTimeout(function() {
+//  d3.select("input").property("checked", true).each(change);
+//}, 2000);
+
+function change() {
+  //clearTimeout(sortTimeout);
+
+  // Copy-on-write since tweens are evaluated after a delay.
+  var x0 = x.domain(temp2.sort(this.checked
+    ? function(a, b) { return b.y - a.y; }
+    : function(a, b) { return d3.ascending(a.x, b.x); })
+    .map(function(d) { return d.x; }))
+    .copy();
+
+    var transition = svg.transition().duration(750),
+    delay = function(d, i) { return i * 10; };
+
+    transition.selectAll("rect")
+    .delay(delay)
+    .attr("x", function(d) { return x0(d.x); });
+
+    transition.select(".x.axis")
+    .call(xAxis)
+    .selectAll("g")
+    .delay(delay);
+  }
+
 </script>
