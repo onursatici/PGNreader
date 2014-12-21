@@ -114,10 +114,12 @@
       var x = moveData[i].charCodeAt(0)-96, y = 9-moveData[i].charCodeAt(1)+48;
       console.log(moveData[i]+" "+x+""+y)
       svgContainer.append('rect')
-                                .attr('x',49*x)
-                                .attr('y',49*y)
+                                .attr('x',49*x-49)
+                                .attr('y',49*y-49)
                                 .attr('height',49)
-                                .attr('width',49);
+                                .attr('width',49)
+                                .attr('fill','blue')
+                                .attr('fill-opacity', data[i+1]);
     }
 
 
