@@ -28,9 +28,11 @@ public class VisualizationOne extends Visualization {
 				if(!(next[0].equals(""+0))){
 					if (map.containsKey(s[1] +", "+ next[1])){
 						map.put((s[1] +", "+ next[1]), map.get((s[1] +", "+ next[1]))+1);
+						
 					}
 					else {
 						map.put((s[1] +", "+ next[1]), 1);
+						if(s[1].equals("a7") && next[1].equals("c8")) System.out.println(piece.getOrigin()+" "+s[0]+" "+s[1]+" "+next[0]+" "+next[1]);
 					}	
 				}
 			}
@@ -45,5 +47,7 @@ public class VisualizationOne extends Visualization {
 			map.clear();
 		}
 	}
-
+	public static void main(String[] agrv){
+		
+	}
 }

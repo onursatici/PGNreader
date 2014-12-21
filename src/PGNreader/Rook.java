@@ -19,8 +19,8 @@ public class Rook extends Piece {
 	}
 	
 	public static void main(String[] argv){
-		Rook r= new Rook("c4","black");
+		Rook r= new Rook("a7","black");
 		
-		System.out.println(r.canMove("f4"));
+		System.out.println(r.canMove("c8"));
 	}
 }

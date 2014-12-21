@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+<body>
+  <form action="test.html">
+    <input type="submit" value="osman"/>
+  </form>
+
+</body>
 <style>
 
 .chart rect {
@@ -17,40 +24,67 @@
 <svg class="chart"></svg>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-var data = [
-{name: "Locke",    value:  4},
-{name: "Reyes",    value:  8},
-{name: "Ford",     value: 15},
-{name: "Jarrah",   value: 16},
-{name: "Shephard", value: 23},
-{name: "Kwon",     value: 42}
-];
+var data2= {
+  "a2" : [ [ "14", "1" ] ],
+  "b2" : [ [ "9", "1" ] ],
+  "c2" : [ [ "12", "1" ] ],
+  "d2" : [ [ "12", "0" ] ],
+  "e2" : [ [ "17", "3" ] ],
+  "f2" : [ [ "8", "0" ] ],
+  "g2" : [ [ "13", "2" ] ],
+  "h2" : [ [ "12", "1" ] ],
+  "a7" : [ [ "10", "0" ] ],
+  "b7" : [ [ "13", "2" ] ],
+  "c7" : [ [ "16", "1" ] ],
+  "d7" : [ [ "21", "5" ] ],
+  "e7" : [ [ "14", "2" ] ],
+  "f7" : [ [ "9", "2" ] ],
+  "g7" : [ [ "10", "1" ] ],
+  "h7" : [ [ "8", "1" ] ],
+  "a1" : [ [ "11", "0" ] ],
+  "b1" : [ [ "24", "3" ] ],
+  "c1" : [ [ "16", "3" ] ],
+  "d1" : [ [ "34", "4" ] ],
+  "e1" : [ [ "21", "2" ] ],
+  "f1" : [ [ "23", "6" ] ],
+  "g1" : [ [ "19", "3" ] ],
+  "h1" : [ [ "13", "0" ] ],
+  "a8" : [ [ "12", "1" ] ],
+  "b8" : [ [ "19", "4" ] ],
+  "c8" : [ [ "17", "2" ] ],
+  "d8" : [ [ "33", "9" ] ],
+  "e8" : [ [ "20", "2" ] ],
+  "f8" : [ [ "22", "5" ] ],
+  "g8" : [ [ "29", "8" ] ],
+  "h8" : [ [ "9", "0" ] ]
+}
 
-
-var width = 420, barHeight = 20;
+var width = 600, barHeight = 20;
 
 var x = d3.scale.linear()
-    .domain([0, d3.max(data, function(d) { return d.value; })])
+    .domain([0, 34])
     .range([0, width]);
 
+//d3.max(d3.entries(data2), function(d) { return d.value[0][0]; })
 var chart = d3.select(".chart")
     .attr("width", width)
-    .attr("height", barHeight * data.length);
+    .attr("height", barHeight * d3.entries(data2).length);
 
 var bar = chart.selectAll("g")
-    .data(data)
+    .data(d3.entries(data2)) // .data(d3.entries(data2))
     .enter()
   .append("g")
-    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+    .attr("transform", function(d, i) { return "translate("+x(d.value[0][1])+ "," + i * barHeight + ")"; })
+
 
 bar.append("rect")
-    .attr("width", function(d) { return x(d.value); })
+    .attr("width", function(d) { return x(d.value[0][0]-d.value[0][1]); })
     .attr("height", barHeight - 1);
 
 bar.append("text")
-    .attr("x", function(d) { return x(d.value) - 3; })
+    .attr("x", function(d) { return x(d.value[0][0]-d.value[0][1]) - 3; })
     .attr("y", barHeight / 2)
     .attr("dy", ".35em")
-    .text(function(d) { return d.name + ": "+d.value; });
+    .text(function(d) { return  d.key + ": "+d.value[0][0]; });
 
 </script>
