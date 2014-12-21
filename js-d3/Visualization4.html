@@ -30,14 +30,17 @@ text {
 #slider{
   position: absolute; top: 420px; left:100px;
 }
-#rangevalue{
-  position: absolute; top: 420px; left: 240px;
+#mySelect{
+  position: absolute; top: 420px; left: 120px;
+}
+#clear{
+  position: absolute; top:420px; left: 180px;
 }
 </style>
 <body>
-    <div id='svgHere'></div> <label><input id='order'type="checkbox"> </label>
-    <input type="range" name="points" id="slider" value="1" min="1" max="100" data-popup-enabled="true" onchange="rangevalue.value=value">
-    <output id="rangevalue">1</output>
+    <div id='svgHere'></div>
+    <select id="mySelect"></select>
+    <input type="button" id="clear" value="clear"/>
     <div id='buttons' >
       <form action="visualization1.html">
         <input type="submit" id="Visualization1" value="Visualization1"/>
@@ -99,60 +102,44 @@ var data= {
 
 
 
-var n = 1, // number of layers
-m = 32; // number of samples per layer
 
 var margin = {top: 10, right: 0, bottom: 0, left: 32},
 width = 700 - margin.left - margin.right,
 height = 410 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
-.domain(d3.keys(data))
-.rangeRoundBands([0, width], .08);
+var x = d3.scale.linear()
+.domain([1,100])
+.range([0,500]);
 
 var y = d3.scale.linear()
-.domain([0, 0.7])
+.domain([0, 0.2])
 .range([height-20, 0]);
 
-var color = d3.scale.linear()
-.domain([0, n - 1])
-.range(["#b58863", "#f0d9b5"]);
+var color = d3.scale.category10();
 
 var yAxis = d3.svg.axis()
 .scale(y)
 .tickSize(0)
 .tickPadding(6)
-.orient("left");
+.orient("left")
+.tickSubdivide(true);
 var xAxis = d3.svg.axis()
 .scale(x)
 .tickSize(0)
 .tickPadding(6)
-.orient("bottom");
-
+.tickSubdivide(true);
 var svg = d3.select("body").select("#svgHere").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform", "translate(32,10)");
-var layers = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[0][1], "y0" : 0} })
 
-d3.select('#slider').on("change", change)
-function change(){
-  var move = document.getElementById("slider").value;
-  layers = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[move-1][1], "y0" : 0} })
-  d3.selectAll("rect").remove();
-  var rect = svg.selectAll("rect")
-  .data(layers)
-  .enter().append("rect")
-  .attr("x", function(d) { return x(d.x); })
-  .attr("y", function(d){return y(d.y);})
-  .attr("width", x.rangeBand())
-  .attr("height", function(d) { return  height-20-y(d.y); })
-  .attr('fill','#b58863');
-
-
-}
-
+var options = d3.select("body").select("select").selectAll("option")
+.data(d3.entries(data))
+.enter()
+.append("option")
+.attr("value", function(d) {return d.key; })
+.text(function(d) {return d.key;});
 
 svg.append("g")
 .attr("class", "x axis")
@@ -164,35 +151,36 @@ svg.append("g")
 .attr("transform","translate(0,0)")
 .call(yAxis);
 
+//console.log(data['a2'].map(function(d,i) {return {"x" : d[1]};})[1]);
+var layers = data['a2'].map(function(d,i) { return {"x":  i+1,"y": d[1]}; })
+var line = d3.svg.line()
+.x(function(d) { return x(d.x); })
+.y(function(d) { return y(d.y); })
+.interpolate('basis');
+var i =0
+d3.select('#mySelect').on("change", change)
+function change(){
+  var data2=data[this.options[this.selectedIndex].value]
+  var c=color(i%9);
+  console.log(c)
+  layers = data2.map(function(d,i) { return {"x": i+1,"y": d[1]}; })
+  console.log(layers[0]);
+  svg.append("path")
+  .datum(layers)
+  .attr("class", "line")
+  .attr("d", line)
+  .attr("stroke",  c )
+  .attr("stroke-width", 2)
+  .attr("fill","none");
+  i=i+1;
+}
 
 
-d3.select("#order").on("change", changeOrder);
+document.getElementById("clear").onclick= function clear(){
+  svg.selectAll("path").remove();
+}
 
-//var sortTimeout = setTimeout(function() {
-//  d3.select("input").property("checked", true).each(change);
-//}, 2000);
 
-function changeOrder() {
-  //clearTimeout(sortTimeout);
 
-  // Copy-on-write since tweens are evaluated after a delay.
-  var x0 = x.domain(layers.sort(this.checked
-    ? function(a, b) { return b.y - a.y; }
-    : function(a, b) { return d3.ascending(a.x, b.x); })
-    .map(function(d) { return d.x; }))
-    .copy();
-
-    var transition = svg.transition().duration(750),
-    delay = function(d, i) { return i * 10; };
-
-    transition.selectAll("rect")
-    .delay(delay)
-    .attr("x", function(d) { return x0(d.x); });
-
-    transition.select(".x.axis")
-    .call(xAxis)
-    .selectAll("g")
-    .delay(delay);
-  }
 
 </script>
