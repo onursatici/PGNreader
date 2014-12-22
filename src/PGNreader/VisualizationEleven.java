@@ -20,7 +20,7 @@ public class VisualizationEleven extends Visualization {
 		int totalGames = P.bELO.size();
 		for (Piece piece: P.allPieces){
 			Vector<String[]> val = pieceMap.get(piece.getOrigin());
-			val.add(new String[]{""+((double) (totalGames-piece.captureHistory.size())/totalGames)});		
+			val.add(new String[]{""+((double) (totalGames-piece.killedBy.size())/totalGames)});		
 		}
 	}
 }

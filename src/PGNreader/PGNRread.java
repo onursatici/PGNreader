@@ -28,7 +28,7 @@ public class PGNRread {
 		try{
 			String currentLine;
 			br=new BufferedReader(new FileReader( //PGN to read
-					"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
+					"/Users/ethangottlieb/Documents/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn")); //"/Users/onursatici/Documents/workspace/PGNreader/ficsgamesdb_201301_standard_nomovetimes_1161103.pgn"));
 			//iterate through every line
 			while((currentLine = br.readLine()) != null){
 
@@ -112,7 +112,10 @@ public class PGNRread {
 		Visualization four = new VisualizationFour(P, "Piece Movement Probability (Static)", "4", "Line Graph");
 		Visualization five = new VisualizationFive(P, "Avg Moves/Captures Per Piece (Static)", "5", "Bar Graph");
 		
-		Visualization[] allVisualizations = {one, two, three, four, five};
+		Visualization eleven = new VisualizationEleven(P, "Survival Probability Per Piece (Static)", "11", "Bar Graph");
+		Visualization twelve = new VisualizationTwelve(P, "Survival Probability Over Time Per Piece (Static)", "12", "Line Graph");
+		
+		Visualization[] allVisualizations = {one, two, three, four, five, eleven, twelve};
 		
 		ObjectMapper mapper = new ObjectMapper(); //form output writer to write the Visualization into a JSON file
 		PrintWriter out = null;
