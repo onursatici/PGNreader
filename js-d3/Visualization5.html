@@ -21,15 +21,19 @@ text {
 
 #svgHere{
 
-  width: 392px; height:392px; position: relative; left: 8px;
+  width: 400px; height:392px; position: relative; left: 15px;
 }
 
 #buttons{
-  position: absolute; top: 420px; left: 8px;
+  position: absolute; top: 480px; left: 8px;
+}
+#order{
+  position: absolute; top: 480px; left: 120px;
 }
 </style>
 <body>
-    <div id='svgHere'></div> <label><input type="checkbox"> </label>
+    <img src = "logo.jpg" />
+    <div id='svgHere'></div> <label><input type="checkbox" id="order"> </label>
     <div id='buttons' >
       <form action="visualization1.html">
         <input type="submit" id="Visualization1" value="Visualization1"/>
@@ -47,44 +51,46 @@ text {
         <input type="submit" id="Visualization5" value="Visualization5"/>
       </form>
     </div>
+    <p style="position: absolute; top: 464px; left: 230px; width: 300px;">Visualization 5. Y axis is count and ordinal X axis is the pieces by their starting location. See the legends for bar colours. Use the radio box for deccending order, uncheck it for column first order. Reset the page for row first order.</p>
 
 </body>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 var data= {
-  "a2" : [ [ "726", "53" ] ],
-  "b2" : [ [ "714", "78" ] ],
-  "c2" : [ [ "866", "121" ] ],
-  "d2" : [ [ "1024", "124" ] ],
-  "e2" : [ [ "1113", "169" ] ],
-  "f2" : [ [ "754", "81" ] ],
-  "g2" : [ [ "716", "59" ] ],
-  "h2" : [ [ "760", "44" ] ],
-  "a7" : [ [ "720", "29" ] ],
-  "b7" : [ [ "777", "79" ] ],
-  "c7" : [ [ "898", "146" ] ],
-  "d7" : [ [ "1038", "142" ] ],
-  "e7" : [ [ "1035", "145" ] ],
-  "f7" : [ [ "732", "74" ] ],
-  "g7" : [ [ "730", "60" ] ],
-  "h7" : [ [ "766", "62" ] ],
-  "a1" : [ [ "1246", "211" ] ],
-  "b1" : [ [ "1553", "237" ] ],
-  "c1" : [ [ "1408", "276" ] ],
-  "d1" : [ [ "1817", "416" ] ],
-  "e1" : [ [ "2152", "151" ] ],
-  "f1" : [ [ "1397", "270" ] ],
-  "g1" : [ [ "1578", "282" ] ],
-  "h1" : [ [ "1560", "203" ] ],
-  "a8" : [ [ "1212", "198" ] ],
-  "b8" : [ [ "1515", "241" ] ],
-  "c8" : [ [ "1291", "232" ] ],
-  "d8" : [ [ "1947", "520" ] ],
-  "e8" : [ [ "2189", "139" ] ],
-  "f8" : [ [ "1417", "256" ] ],
-  "g8" : [ [ "1449", "235" ] ],
-  "h8" : [ [ "1530", "226" ] ]
+  "a2" : [ [ "65817", "4487" ] ],
+  "b2" : [ [ "65291", "7440" ] ],
+  "c2" : [ [ "76037", "9806" ] ],
+  "d2" : [ [ "88839", "10794" ] ],
+  "e2" : [ [ "95515", "13142" ] ],
+  "f2" : [ [ "67316", "7700" ] ],
+  "g2" : [ [ "63170", "5563" ] ],
+  "h2" : [ [ "66288", "4377" ] ],
+  "a7" : [ [ "67685", "4330" ] ],
+  "b7" : [ [ "68738", "7880" ] ],
+  "c7" : [ [ "79646", "12244" ] ],
+  "d7" : [ [ "88283", "12115" ] ],
+  "e7" : [ [ "90720", "13371" ] ],
+  "f7" : [ [ "64164", "7671" ] ],
+  "g7" : [ [ "64994", "5899" ] ],
+  "h7" : [ [ "64957", "4542" ] ],
+  "a1" : [ [ "113139", "18419" ] ],
+  "b1" : [ [ "134937", "20528" ] ],
+  "c1" : [ [ "119195", "23198" ] ],
+  "d1" : [ [ "170574", "41375" ] ],
+  "e1" : [ [ "175232", "11538" ] ],
+  "f1" : [ [ "127251", "24583" ] ],
+  "g1" : [ [ "128195", "23783" ] ],
+  "h1" : [ [ "131377", "18756" ] ],
+  "a8" : [ [ "113343", "18759" ] ],
+  "b8" : [ [ "132352", "20587" ] ],
+  "c8" : [ [ "116001", "22296" ] ],
+  "d8" : [ [ "168350", "41017" ] ],
+  "e8" : [ [ "183764", "13617" ] ],
+  "f8" : [ [ "123866", "24429" ] ],
+  "g8" : [ [ "124883", "20434" ] ],
+  "h8" : [ [ "126591", "18190" ] ]
+
 }
 
 var temp2 = d3.entries(data).map(function(d) { return {"x":  d.key,"y": d.value[0][0], "y0" : 0} })
@@ -110,7 +116,7 @@ var x = d3.scale.ordinal()
 .rangeRoundBands([0, width], .08);
 
 var y = d3.scale.linear()
-.domain([0, 2200])
+.domain([0, 180000])
 .range([height-20, 0]);
 
 var color = d3.scale.linear()
@@ -132,7 +138,7 @@ var svg = d3.select("body").select("#svgHere").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
-.attr("transform", "translate(32,10)");
+.attr("transform", "translate(42,10)");
 
 var layer = svg.selectAll(".layer")
 .data(layers)
